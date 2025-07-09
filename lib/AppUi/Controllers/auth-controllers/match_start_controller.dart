@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class MatchStartController extends GetxController {
   void startMatch() {
-    Get.toNamed('/next'); // Or your real route
+    Get.toNamed('/match-preview'); // Or your real route
   }
 
   void changeTeamA() {
