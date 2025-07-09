@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class ProfileCard extends StatelessWidget {
   final bool isWide;
-  const ProfileCard({required this.isWide});
+  const ProfileCard({super.key, required this.isWide});
   @override
   Widget build(BuildContext c) => Stack(
     alignment: Alignment.center,

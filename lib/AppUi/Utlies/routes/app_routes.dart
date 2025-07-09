@@ -8,7 +8,9 @@ import '../../AppScreens/authScreens/verify_otp_screen.dart';
 import '../../AppScreens/authScreens/complete_profile_screen.dart';
 import '../../AppScreens/home_screen.dart';
 import '../../AppScreens/stats_screen.dart';
-import '../../AppScreens/match_setup_screen.dart'; // ✅ MatchSetupScreen imported
+import '../../AppScreens/match_setup_screen.dart';
+import '../../AppScreens/team_selection_screen.dart';
+import '../../AppScreens/add_players_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -19,8 +21,9 @@ class AppRoutes {
   static const String completeProfile = '/complete-profile';
   static const String home = '/home';
   static const String stats = '/stats';
-  static const String matchSetup = '/match-setup'; // ✅ New route name added
-  static const String next = '/next';
+  static const String matchSetup = '/match-setup';
+  static const String teamSelection = '/team_selection';
+  static const String addPlayers = '/add-players';
 
   static final pages = [
     GetPage(name: splashscreen, page: () => SplashScreen()),
@@ -59,8 +62,21 @@ class AppRoutes {
     GetPage(
       name: matchSetup,
       page: () => MatchSetupScreen(),
-      transition: Transition.rightToLeft, // ✅ Transition added
-      transitionDuration: Duration(milliseconds: 600),
+      transition: Transition.rightToLeft,
+      // transitionDuration: Duration(milliseconds: 600),
     ),
+    GetPage(
+      name: teamSelection,
+      page: () => TeamSelectionScreen(),
+      transition: Transition.rightToLeft,
+      // transitionDuration: Duration(milliseconds: 600),
+    ),
+    GetPage(
+      name: addPlayers,
+      page: () => const AddPlayersScreen(),
+      transition: Transition.rightToLeft,
+      // transitionDuration: Duration(milliseconds: 500),
+    ),
+  
   ];
 }

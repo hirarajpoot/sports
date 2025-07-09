@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class ResendOtpTimer extends StatelessWidget {
   final VerifyOtpController controller;
 
-  ResendOtpTimer({required this.controller});
+  const ResendOtpTimer({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

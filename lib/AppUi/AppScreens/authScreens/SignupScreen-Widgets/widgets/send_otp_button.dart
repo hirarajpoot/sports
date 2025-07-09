@@ -6,7 +6,7 @@ class SendOtpButton extends StatelessWidget {
   final SignupController controller;
   final TextEditingController phoneController;
 
-  SendOtpButton({required this.controller, required this.phoneController});
+  const SendOtpButton({super.key, required this.controller, required this.phoneController});
 
   @override
   Widget build(BuildContext context) {

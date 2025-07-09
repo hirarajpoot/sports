@@ -10,6 +10,8 @@ import 'SignupScreen-Widgets/widgets/terms_and_privacy.dart';
 class SignupScreen extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
 
+  SignupScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SignupController>(

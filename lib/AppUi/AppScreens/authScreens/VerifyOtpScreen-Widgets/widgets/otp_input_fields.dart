@@ -5,7 +5,7 @@ import '../../../../Controllers/auth-controllers/verify_otp_controller.dart';
 class OtpInputFields extends StatelessWidget {
   final VerifyOtpController controller;
 
-  OtpInputFields({required this.controller});
+  const OtpInputFields({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

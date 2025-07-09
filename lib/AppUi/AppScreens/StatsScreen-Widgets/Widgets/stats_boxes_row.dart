@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class StatsBoxesRow extends StatelessWidget {
   final bool isWide;
-  const StatsBoxesRow({required this.isWide});
+  const StatsBoxesRow({super.key, required this.isWide});
   @override
   Widget build(BuildContext c) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

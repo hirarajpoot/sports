@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ActionButtons extends StatelessWidget {
   final bool isWide;
-  const ActionButtons({required this.isWide});
+  const ActionButtons({super.key, required this.isWide});
   @override
   Widget build(BuildContext c) => Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,

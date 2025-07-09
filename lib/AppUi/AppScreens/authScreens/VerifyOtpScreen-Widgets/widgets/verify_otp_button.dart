@@ -6,7 +6,7 @@ import '../../../../Utlies/routes/app_routes.dart';
 class VerifyOtpButton extends StatelessWidget {
   final VerifyOtpController controller;
 
-  VerifyOtpButton({required this.controller});
+  const VerifyOtpButton({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

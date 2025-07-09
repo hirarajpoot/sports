@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../Controllers/auth-controllers/meet_controller.dart';
 
 class MeetScreen extends StatelessWidget {
+  const MeetScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MeetController>(
@@ -13,7 +15,7 @@ class MeetScreen extends StatelessWidget {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final isMobile = constraints.maxWidth < 600;
-                return Container(
+                return SizedBox(
                   width: double.infinity,
                   height: double.infinity,
                   child: Stack(

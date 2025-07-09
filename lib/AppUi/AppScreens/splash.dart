@@ -6,6 +6,8 @@ import '../Controllers/auth-controllers/splash_controller.dart';
 import '../Utlies/routes/app_routes.dart';
 
 class Splash extends StatefulWidget {
+  const Splash({super.key});
+
   @override
   _SplashState createState() => _SplashState();
 }

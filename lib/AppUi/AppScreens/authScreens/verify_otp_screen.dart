@@ -9,6 +9,8 @@ import 'VerifyOtpScreen-Widgets/widgets/resend_otp_timer.dart';
 class VerifyOtpScreen extends StatelessWidget {
   final VerifyOtpController controller = Get.put(VerifyOtpController());
 
+   VerifyOtpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../Controllers/auth-controllers/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashScreenController>(

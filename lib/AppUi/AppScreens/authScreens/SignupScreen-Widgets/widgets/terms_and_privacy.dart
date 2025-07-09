@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TermsAndPrivacyText extends StatelessWidget {
-  const TermsAndPrivacyText();
+  const TermsAndPrivacyText({super.key});
 
   @override
   Widget build(BuildContext context) {

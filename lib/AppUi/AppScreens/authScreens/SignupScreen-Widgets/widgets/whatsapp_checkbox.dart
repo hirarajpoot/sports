@@ -5,7 +5,7 @@ import '../../../../Controllers/auth-controllers/signup_controller.dart';
 class WhatsappCheckbox extends StatelessWidget {
   final SignupController controller;
 
-  WhatsappCheckbox({required this.controller});
+  const WhatsappCheckbox({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

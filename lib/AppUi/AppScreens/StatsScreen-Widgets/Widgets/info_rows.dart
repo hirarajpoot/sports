@@ -4,7 +4,7 @@ import '../../../Controllers/auth-controllers/stats_controller.dart';
 class InfoRows extends StatelessWidget {
   final bool isWide;
   final StatsController controller;
-  const InfoRows({required this.isWide, required this.controller});
+  const InfoRows({super.key, required this.isWide, required this.controller});
   @override
   Widget build(BuildContext c) => Column(children: [
     Row(children: [

@@ -4,7 +4,7 @@ import '../../../Controllers/auth-controllers/stats_controller.dart';
 class TabsRow extends StatelessWidget {
   final bool isWide;
   final StatsController controller;
-  const TabsRow({required this.isWide, required this.controller});
+  const TabsRow({super.key, required this.isWide, required this.controller});
   @override
   Widget build(BuildContext c) => Obx(() => Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,

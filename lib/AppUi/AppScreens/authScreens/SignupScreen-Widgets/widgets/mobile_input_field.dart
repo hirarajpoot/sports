@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MobileInputField extends StatelessWidget {
   final TextEditingController controller;
 
-  MobileInputField({required this.controller});
+  const MobileInputField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
