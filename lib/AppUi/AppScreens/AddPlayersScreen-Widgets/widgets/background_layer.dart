@@ -5,13 +5,16 @@ class BackgroundLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: 0.05,
-      child: Image.asset(
-        'assets/images/ground.png',
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
+    return Transform.translate(
+      offset: const Offset(0, 90), // 👈 shifts image 60 pixels downward
+      child: Opacity(
+        opacity: 0.05,
+        child: Image.asset(
+          'assets/images/ground.png',
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
       ),
     );
   }
