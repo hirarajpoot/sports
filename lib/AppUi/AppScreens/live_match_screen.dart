@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Controllers/auth-controllers/match_preview_controller.dart';
 import '../../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
-// import 'match_preview_widgets/vs_circle.dart';
 
 class LiveMatchScreen extends StatelessWidget {
   const LiveMatchScreen({super.key});
@@ -43,6 +42,8 @@ class LiveMatchScreen extends StatelessWidget {
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
+                          fontFamily: 'Inter',
+                          decoration: TextDecoration.none,
                         ),
                       ),
                       const Spacer(),
@@ -72,7 +73,7 @@ class LiveMatchScreen extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        // ✅ Top: Football Images + Team Names
+                        // Top: Football Images + Team Names
                         Positioned(
                           top: 28,
                           left: 0,
@@ -86,8 +87,10 @@ class LiveMatchScreen extends StatelessWidget {
                           ),
                         ),
 
-                        // ✅ Center: VS Circle (Updated size & no border)
+                        // Center: VS Circle
                         Positioned(top: 150, child: _VsCircleCustom()),
+
+                        // Below VS Circle: Live Text
                         const Positioned(
                           top: 150 + 44 + 19,
                           child: Text(
@@ -96,11 +99,13 @@ class LiveMatchScreen extends StatelessWidget {
                               color: Colors.red,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Inter',
+                              decoration: TextDecoration.none,
                             ),
                           ),
                         ),
 
-                        // ✅ Bottom: Scores + Buttons
+                        // Bottom: Scores + Buttons
                         Positioned(
                           bottom: 40,
                           left: 0,
@@ -148,6 +153,8 @@ class LiveMatchScreen extends StatelessWidget {
                     fontSize: 16,
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
+                    fontFamily: 'Inter',
+                    decoration: TextDecoration.none,
                   ),
                 ),
               ],
@@ -184,20 +191,25 @@ class LiveMatchScreen extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             fontFamily: 'Inter',
+            decoration: TextDecoration.none,
           ),
         ),
       ],
     );
   }
 
-  // ✅ Score Controls Updated
   Widget _scoreControls(RxInt score) {
     return Obx(
       () => Column(
         children: [
           Text(
             '${score.value}',
-            style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Inter',
+              decoration: TextDecoration.none,
+            ),
           ),
           const SizedBox(height: 8),
           Row(
@@ -254,7 +266,12 @@ class LiveMatchScreen extends StatelessWidget {
       alignment: Alignment.center,
       child: const Text(
         'VS',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+          fontFamily: 'Inter',
+          decoration: TextDecoration.none,
+        ),
       ),
     );
   }
@@ -279,12 +296,20 @@ class LiveMatchScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Inter',
+                  decoration: TextDecoration.none,
                 ),
               ),
               const Text(
                 'If you end this match you\nwon’t be able to edit it later',
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black87,
+                  fontFamily: 'Inter',
+                  decoration: TextDecoration.none,
+                ),
                 textAlign: TextAlign.center,
               ),
               Row(
@@ -294,8 +319,19 @@ class LiveMatchScreen extends StatelessWidget {
                     onPressed: () => Get.back(),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
+                      fixedSize: const Size(111, 27),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
-                    child: const Text('Cancel'),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Inter',
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -304,8 +340,19 @@ class LiveMatchScreen extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
+                      fixedSize: const Size(111, 27),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
-                    child: const Text('End'),
+                    child: const Text(
+                      'End',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Inter',
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                   ),
                 ],
               ),
