@@ -16,14 +16,11 @@ class LiveMatchController extends GetxController {
   }
 
   void showEndMatchDialog() {
-    Get.dialog(
-      const WarningDialog(),
-      barrierDismissible: false,
-    );
+    Get.dialog(const WarningDialog(), barrierDismissible: false);
   }
 
   void endMatch() {
     Get.back(); // Close dialog
-    Get.toNamed('/nextScreen'); // ✅ Navigate to next screen
+    Get.toNamed('/match-summary'); // ✅ Navigate to next screen
   }
 }
