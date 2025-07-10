@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TopBackButton extends StatelessWidget {
   final VoidCallback onTap;
-  const TopBackButton({required this.onTap});
+  const TopBackButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

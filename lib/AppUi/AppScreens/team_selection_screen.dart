@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Controllers/auth-controllers/team_selection_controller.dart';
 import '../AppScreens/TeamSelection-Widgets/top_bar.dart';
-import '../AppScreens/TeamSelection-Widgets/info_box.dart';
+import 'TeamSelection-Widgets/info_box.dart';
 import '../AppScreens/TeamSelection-Widgets/select_club_switch.dart';
 import '../AppScreens/TeamSelection-Widgets/team_card.dart';
 import '../AppScreens/TeamSelection-Widgets/vs_circle.dart';

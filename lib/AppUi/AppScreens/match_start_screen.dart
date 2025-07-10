@@ -8,7 +8,7 @@ import 'MatchStartScreen-Widgets/vs_circle.dart';
 import 'MatchStartScreen-Widgets/change_button.dart';
 
 class MatchStartScreen extends StatelessWidget {
-  const MatchStartScreen({Key? key}) : super(key: key);
+  const MatchStartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

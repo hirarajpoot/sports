@@ -7,7 +7,7 @@ import './AddPlayersScreen-Widgets/widgets/header_text.dart';
 import './AddPlayersScreen-Widgets/widgets/player_option_card.dart';
 
 class AddPlayersScreen extends StatelessWidget {
-  const AddPlayersScreen({Key? key}) : super(key: key);
+  const AddPlayersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

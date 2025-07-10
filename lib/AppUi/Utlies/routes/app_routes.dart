@@ -13,7 +13,8 @@ import '../../AppScreens/match_setup_screen.dart';
 import '../../AppScreens/team_selection_screen.dart';
 import '../../AppScreens/add_players_screen.dart';
 import '../../AppScreens/match_start_screen.dart';
-import '../../AppScreens/match_preview_screen.dart'; // ✅ Imported Match Preview
+import '../../AppScreens/match_preview_screen.dart';
+// import '../../AppScreens/live_match_screen.dart'; 
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -28,7 +29,8 @@ class AppRoutes {
   static const String teamSelection = '/team_selection';
   static const String addPlayers = '/add-players';
   static const String matchStart = '/match-start';
-  static const String matchPreview = '/match-preview'; // ✅ Route name
+  static const String matchPreview = '/match-preview';
+  static const String liveMatch = '/live-match'; // ✅ Added route name
 
   static final pages = [
     GetPage(name: splashscreen, page: () => SplashScreen()),
@@ -85,13 +87,19 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
-
-    // ✅ Match Preview Screen Route
     GetPage(
       name: matchPreview,
       page: () => const MatchPreviewScreen(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
+
+    // ✅ Live Match Screen Route
+    // GetPage(
+    //   name: liveMatch,
+    //   page: () => const LiveMatchScreen(),
+    //   transition: Transition.rightToLeft,
+    //   transitionDuration: Duration(milliseconds: 500),
+    // ),
   ];
 }
