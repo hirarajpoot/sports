@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../Controllers/auth-controllers/match_preview_controller.dart';
+import '../Controllers/auth-controllers/live_match_controller.dart';
 import '../../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
+import 'LiveMatchScreen-Widgets/header.dart';
+import 'LiveMatchScreen-Widgets/match_container.dart';
 
 class LiveMatchScreen extends StatelessWidget {
   const LiveMatchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(MatchPreviewController());
+    final ctrl = Get.put(LiveMatchController());
     final mq = MediaQuery.of(context);
     final isWide = mq.size.width > 600;
 
@@ -20,122 +22,21 @@ class LiveMatchScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isWide ? 32 : 16,
-                    vertical: isWide ? 24 : 16,
-                  ),
-                  child: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black,
-                        ),
-                        onPressed: () => Get.back(),
-                      ),
-                      const Spacer(),
-                      const Text(
-                        'Live Match',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                          fontFamily: 'Inter',
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
-
+                LiveMatchHeader(isWide: isWide),
                 const SizedBox(height: 24),
-
-                // Main Match Container
-                Center(
-                  child: Container(
-                    width: 336,
-                    height: 409,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(77, 173, 173, 253),
-                          Color.fromARGB(77, 253, 195, 195),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Top: Football Images + Team Names
-                        Positioned(
-                          top: 28,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _teamColumn('TEAM 1', Colors.green),
-                              _teamColumn('TEAM 2', Colors.red),
-                            ],
-                          ),
-                        ),
-
-                        // Center: VS Circle
-                        Positioned(top: 150, child: _VsCircleCustom()),
-
-                        // Below VS Circle: Live Text
-                        const Positioned(
-                          top: 150 + 44 + 19,
-                          child: Text(
-                            'Live',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Inter',
-                              decoration: TextDecoration.none,
-                            ),
-                          ),
-                        ),
-
-                        // Bottom: Scores + Buttons
-                        Positioned(
-                          bottom: 40,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _scoreControls(ctrl.score1),
-                              _scoreControls(ctrl.score2),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const MatchContainer(),
               ],
             ),
           ),
         ],
       ),
-
-      // Bottom Button
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         child: SizedBox(
           width: 350,
           height: 56,
           child: ElevatedButton(
-            onPressed: () => _showEndMatchDialog(context),
+            onPressed: ctrl.showEndMatchDialog,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               shape: RoundedRectangleBorder(
@@ -162,205 +63,6 @@ class LiveMatchScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _teamColumn(String name, Color borderColor) {
-    return Column(
-      children: [
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: borderColor, width: 10),
-          ),
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/football.png',
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            fontFamily: 'Inter',
-            decoration: TextDecoration.none,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _scoreControls(RxInt score) {
-    return Obx(
-      () => Column(
-        children: [
-          Text(
-            '${score.value}',
-            style: const TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Inter',
-              decoration: TextDecoration.none,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              _roundIconButton(
-                Icons.remove,
-                () {
-                  if (score.value > 0) score.value--;
-                },
-                Colors.red,
-                Colors.white,
-              ),
-              const SizedBox(width: 12),
-              _roundIconButton(
-                Icons.add,
-                () {
-                  score.value++;
-                },
-                Colors.white,
-                Colors.black,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _roundIconButton(
-    IconData icon,
-    VoidCallback onTap,
-    Color bgColor,
-    Color iconColor,
-  ) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(shape: BoxShape.circle, color: bgColor),
-        child: Icon(icon, color: iconColor, size: 20),
-      ),
-    );
-  }
-
-  static Widget _VsCircleCustom() {
-    return Container(
-      width: 44,
-      height: 44,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-      ),
-      alignment: Alignment.center,
-      child: const Text(
-        'VS',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-          fontFamily: 'Inter',
-          decoration: TextDecoration.none,
-        ),
-      ),
-    );
-  }
-
-  void _showEndMatchDialog(BuildContext context) {
-    Get.dialog(
-      Center(
-        child: Container(
-          width: 300,
-          height: 180,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Icon(Icons.warning, size: 40, color: Colors.red),
-              const Text(
-                'Warning!',
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Inter',
-                  decoration: TextDecoration.none,
-                ),
-              ),
-              const Text(
-                'If you end this match you\nwon’t be able to edit it later',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black87,
-                  fontFamily: 'Inter',
-                  decoration: TextDecoration.none,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: () => Get.back(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      fixedSize: const Size(111, 27),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Inter',
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Get.back();
-                      Get.back();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      fixedSize: const Size(111, 27),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    child: const Text(
-                      'End',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Inter',
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      barrierDismissible: false,
     );
   }
 }
