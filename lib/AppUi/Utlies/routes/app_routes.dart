@@ -14,7 +14,7 @@ import '../../AppScreens/team_selection_screen.dart';
 import '../../AppScreens/add_players_screen.dart';
 import '../../AppScreens/match_start_screen.dart';
 import '../../AppScreens/match_preview_screen.dart';
-// import '../../AppScreens/live_match_screen.dart'; 
+import '../../AppScreens/live_match_screen.dart'; 
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -81,12 +81,14 @@ class AppRoutes {
       page: () => const AddPlayersScreen(),
       transition: Transition.rightToLeft,
     ),
+    
     GetPage(
       name: matchStart,
       page: () => const MatchStartScreen(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
+
     GetPage(
       name: matchPreview,
       page: () => const MatchPreviewScreen(),
@@ -94,12 +96,11 @@ class AppRoutes {
       transitionDuration: Duration(milliseconds: 500),
     ),
 
-    // ✅ Live Match Screen Route
-    // GetPage(
-    //   name: liveMatch,
-    //   page: () => const LiveMatchScreen(),
-    //   transition: Transition.rightToLeft,
-    //   transitionDuration: Duration(milliseconds: 500),
-    // ),
+    GetPage(
+      name: liveMatch,
+      page: () => const LiveMatchScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
   ];
 }

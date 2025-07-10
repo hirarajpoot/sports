@@ -16,7 +16,7 @@ class MatchPreviewController extends GetxController {
     if (!isReady.value) {
       isReady(true);
     } else {
-      Get.toNamed('/next'); // Navigate
+      Get.toNamed('/live-match'); 
     }
   }
 }
