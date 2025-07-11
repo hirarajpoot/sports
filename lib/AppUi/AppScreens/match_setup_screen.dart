@@ -15,34 +15,34 @@ class MatchSetupScreen extends StatelessWidget {
     final isWide = mq.size.width > 600;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: TopBar(isWide: isWide),
-      body: Stack(children: [
-        Positioned.fill(
-          child: Opacity(
-            opacity: 0.05,
-            child: Image.asset(
-              'assets/images/ground.png',
-              fit: BoxFit.cover,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.05,
+              child: Image.asset('assets/images/ground.png', fit: BoxFit.cover),
             ),
           ),
-        ),
-        SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: isWide ? mq.size.width * 0.2 : 24,
-            vertical: 16,
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal: isWide ? mq.size.width * 0.2 : 24,
+              vertical: 16,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: kToolbarHeight + 16),
+                ConfigureCard(isWide: isWide),
+                const SizedBox(height: 118),
+                ContinueButton(isWide: isWide, onTap: cont.toTeamSelection),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              const SizedBox(height: kToolbarHeight + 16),
-              ConfigureCard(isWide: isWide),
-              const SizedBox(height: 118),
-              ContinueButton(isWide: isWide, onTap: cont.toTeamSelection),
-              const SizedBox(height: 24),
-            ],
-          ),
-        )
-      ]),
+        ],
+      ),
     );
   }
 }

@@ -15,7 +15,8 @@ import '../../AppScreens/add_players_screen.dart';
 import '../../AppScreens/match_start_screen.dart';
 import '../../AppScreens/match_preview_screen.dart';
 import '../../AppScreens/live_match_screen.dart';
-import '../../AppScreens/match_summary_screen.dart'; // ✅ Imported Match Summary Screen
+import '../../AppScreens/match_summary_screen.dart';
+import '../../AppScreens/leaderboard_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -32,7 +33,8 @@ class AppRoutes {
   static const String matchStart = '/match-start';
   static const String matchPreview = '/match-preview';
   static const String liveMatch = '/live-match';
-  static const String matchSummary = '/match-summary'; // ✅ Added route name
+  static const String matchSummary = '/match-summary';
+  static const String leaderboard = '/leaderboard';
 
   static final pages = [
     GetPage(name: splashscreen, page: () => SplashScreen()),
@@ -103,7 +105,13 @@ class AppRoutes {
     ),
     GetPage(
       name: matchSummary,
-      page: () => MatchSummaryScreen(), // ✅ Registered Match Summary Screen
+      page: () => MatchSummaryScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: leaderboard,
+      page: () => LeaderboardScreen(), // ✅ Registered Leaderboard Screen
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
