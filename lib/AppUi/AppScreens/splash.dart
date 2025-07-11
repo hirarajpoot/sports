@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 50),
+      duration: const Duration(seconds: 50),
       vsync: this,
     );
 
@@ -30,7 +30,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(Duration(milliseconds: 50), () {
+        Future.delayed(const Duration(milliseconds: 50), () {
           Get.offAllNamed(AppRoutes.meet);
         });
       }
@@ -55,7 +55,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           body: Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xFF1A9A5D), Color(0xFF76D7C4)],
                 begin: Alignment.topCenter,
@@ -77,7 +77,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                   right: 0,
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'B U I L D   F O R   B A L L E R S',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -87,12 +87,12 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                           letterSpacing: 1.0,
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       Container(
                         width: fieldWidth,
                         height: 25,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.transparent, // ✅ Background removed
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.white, width: 1.5),
                         ),
@@ -126,10 +126,13 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                             ),
                             Positioned.fill(
                               child: Padding(
-                                padding: EdgeInsets.only(left: 30, right: 5),
+                                padding: const EdgeInsets.only(
+                                  left: 30,
+                                  right: 5,
+                                ),
                                 child: TextField(
-                                  style: TextStyle(color: Colors.black),
-                                  decoration: InputDecoration(
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: const InputDecoration(
                                     hintStyle: TextStyle(color: Colors.grey),
                                     border: InputBorder.none,
                                   ),

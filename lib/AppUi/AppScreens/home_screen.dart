@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Controllers/auth-controllers/home_controller.dart';
 import 'HomeScreen-Widgets/Widgets/bottom_nav_bar.dart';
+import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -16,17 +17,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Opacity(
-            opacity: 0.05,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(
-                'assets/images/ground.png',
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          const BackgroundLayer(),
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -35,13 +26,15 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  /// 🔘 Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 18,
-                        backgroundImage:
-                            const AssetImage('assets/images/Ellipse 64.png'),
+                        backgroundImage: AssetImage(
+                          'assets/images/Ellipse 64.png',
+                        ),
                       ),
                       Row(
                         children: [
@@ -61,28 +54,24 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 40),
+
+                  /// 🔘 Action Buttons
                   Center(
-                    child: Container(
-                      width: isWide ? 350 : double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Image.asset(
-                          'assets/images/start.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _homeButton('Start Match'),
+                        const SizedBox(width: 16),
+                        _homeButton('Find Sponsors'),
+                      ],
                     ),
                   ),
+
+                  const SizedBox(height: 24),
+
+                  /// 🔘 Social-style post
+                  _centeredPostCard(isWide),
+
                   const Spacer(),
                 ],
               ),
@@ -91,6 +80,170 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),
+    );
+  }
+
+  /// ✅ Reusable styled button
+  Widget _homeButton(String title) {
+    return SizedBox(
+      width: 146,
+      height: 41,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFF2E8A57),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          elevation: 2,
+        ),
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// ✅ Social-style post widget
+  Widget _centeredPostCard(bool isWide) {
+    final RxBool isLiked = false.obs;
+
+    return Center(
+      child: Container(
+        width: isWide ? 500 : double.infinity,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// 👤 User Info Row
+            Row(
+              children: [
+                const CircleAvatar(
+                  radius: 18,
+                  backgroundImage: AssetImage('assets/images/Ellipse 64.png'),
+                ),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Elite Club',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      '2 hours ago',
+                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            /// 📝 Description
+            const Text(
+              'What a thrilling match today between the Warriors and Titans! Unforgettable moments!',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            /// 🖼️ Image with Border
+            Container(
+              width: double.infinity,
+              height: 180,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300, width: 1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  'assets/images/match.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            /// ❤️ Action Row with Like Toggle
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => isLiked.toggle(),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.thumb_up_alt,
+                          size: 20,
+                          color: isLiked.value ? Colors.green : Colors.grey,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Like',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isLiked.value ? Colors.green : Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.comment_outlined,
+                        size: 20,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        'Comment',
+                        style: TextStyle(fontSize: 13, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Icon(Icons.share_outlined, size: 20, color: Colors.grey),
+                      SizedBox(width: 8),
+                      Text(
+                        'Share',
+                        style: TextStyle(fontSize: 13, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

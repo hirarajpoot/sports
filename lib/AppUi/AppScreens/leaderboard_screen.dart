@@ -1,27 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
-
-class LeaderboardUserModel {
-  final String name;
-  final String username;
-  final String image;
-  final int games;
-  final int goals;
-
-  LeaderboardUserModel({
-    required this.name,
-    required this.username,
-    required this.image,
-    required this.games,
-    required this.goals,
-  });
-}
-
-class LeaderboardController extends GetxController {
-  final tabs = ['Man Of The Match', 'Striker', 'Midfielder', 'Goal Keeper'];
-  final selectedIndex = 0.obs;
-}
+import '../Controllers/auth-controllers/leaderboard_controller.dart';
+import '../Models/leaderboard_user_model.dart';
 
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({Key? key}) : super(key: key);
@@ -33,7 +14,7 @@ class LeaderboardScreen extends StatelessWidget {
     final horizontalPadding = size.width * 0.05;
     final titleFontSize = size.width < 600 ? 20.0 : 28.0;
 
-    final List<LeaderboardUserModel> users = [
+    final users = <LeaderboardUserModel>[
       LeaderboardUserModel(
         name: 'Lana Steiner',
         username: '@lana',
@@ -41,46 +22,46 @@ class LeaderboardScreen extends StatelessWidget {
         games: 7,
         goals: 7,
       ),
+
       LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
+        name: 'Lana Steiner',
+        username: '@lana',
         image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
+        games: 7,
+        goals: 7,
       ),
 
       LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
+        name: 'Lana Steiner',
+        username: '@lana',
         image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
+        games: 7,
+        goals: 7,
       ),
 
       LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
+        name: 'Lana Steiner',
+        username: '@lana',
         image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
+        games: 7,
+        goals: 7,
       ),
 
       LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
+        name: 'Lana Steiner',
+        username: '@lana',
         image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
+        games: 7,
+        goals: 7,
       ),
 
       LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
+        name: 'Lana Steiner',
+        username: '@lana',
         image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
+        games: 7,
+        goals: 7,
       ),
-
       LeaderboardUserModel(
         name: 'Phoenix Baker',
         username: '@phoenix',
@@ -109,7 +90,7 @@ class LeaderboardScreen extends StatelessWidget {
         games: 7,
         goals: 10,
       ),
-    ];
+    ].obs;
 
     return Scaffold(
       body: Stack(
@@ -195,8 +176,6 @@ class LeaderboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-
-                  /// ✅ Header Row with checkbox
                   Container(
                     height: 45,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -250,79 +229,90 @@ class LeaderboardScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-
                   const Divider(height: 0),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: users.length,
-                      itemBuilder: (_, i) {
-                        final user = users[i];
-                        return Container(
-                          height: 59,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.grey.shade300),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 24,
-                                child: Center(
-                                  child: Text(
-                                    '${i + 1}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
+                  Obx(
+                    () => Expanded(
+                      child: ListView.builder(
+                        itemCount: users.length,
+                        itemBuilder: (_, i) {
+                          final user = users[i];
+                          return GestureDetector(
+                            onTap: () => ctrl.goToNextScreenIfFirst(i),
+                            child: Container(
+                              height: 59,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.grey.shade300,
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 8),
-                              CircleAvatar(
-                                radius: 20,
-                                backgroundImage: AssetImage(user.image),
-                                onBackgroundImageError: (_, __) => debugPrint(
-                                  'Image not found: ${user.image}',
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      user.name,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 24,
+                                    child: Center(
+                                      child: Text(
+                                        '${i + 1}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
-                                    Text(
-                                      user.username,
-                                      style: TextStyle(
-                                        color: Colors.grey.shade600,
-                                        fontSize: 12,
-                                      ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  CircleAvatar(
+                                    radius: 20,
+                                    backgroundImage: AssetImage(user.image),
+                                    onBackgroundImageError: (_, __) =>
+                                        debugPrint(
+                                          'Image not found: ${user.image}',
+                                        ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          user.name,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        Text(
+                                          user.username,
+                                          style: TextStyle(
+                                            color: Colors.grey.shade600,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Text(
+                                    '${user.games}',
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Text(
+                                    '${user.goals}',
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '${user.games}',
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                              const SizedBox(width: 20),
-                              Text(
-                                '${user.goals}',
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],

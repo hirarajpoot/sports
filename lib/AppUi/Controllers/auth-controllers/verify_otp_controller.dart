@@ -18,8 +18,8 @@ class VerifyOtpController extends GetxController {
   }
 
   void checkOtpCompletion() {
-    isOtpComplete.value =
-        otpDigits.every((digit) => digit.value.isNotEmpty);
+    bool allFilled = otpDigits.every((digit) => digit.value.isNotEmpty);
+    isButtonGreen.value = allFilled; // ✅ Button green when all digits filled
   }
 
   void startResendTimer() {

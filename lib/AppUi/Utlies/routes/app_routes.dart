@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 // Screens
-import '../../AppScreens/splash_screen.dart';
 import '../../AppScreens/splash.dart';
 import '../../AppScreens/meet_screen.dart';
 import '../../AppScreens/authScreens/signup_screen.dart';
@@ -17,6 +16,7 @@ import '../../AppScreens/match_preview_screen.dart';
 import '../../AppScreens/live_match_screen.dart';
 import '../../AppScreens/match_summary_screen.dart';
 import '../../AppScreens/leaderboard_screen.dart';
+import '../../AppScreens/match_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -35,16 +35,16 @@ class AppRoutes {
   static const String liveMatch = '/live-match';
   static const String matchSummary = '/match-summary';
   static const String leaderboard = '/leaderboard';
+  static const String matchScreen = '/match-screen';
 
   static final pages = [
-    GetPage(name: splashscreen, page: () => SplashScreen()),
     GetPage(name: splash, page: () => Splash()),
     GetPage(name: meet, page: () => MeetScreen()),
     GetPage(
       name: signup,
       page: () => SignupScreen(),
       transition: Transition.downToUp,
-      transitionDuration: Duration(milliseconds: 1200),
+      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: verifyOtp,
@@ -89,7 +89,6 @@ class AppRoutes {
       name: matchStart,
       page: () => const MatchStartScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: matchPreview,
@@ -101,19 +100,23 @@ class AppRoutes {
       name: liveMatch,
       page: () => const LiveMatchScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: matchSummary,
       page: () => MatchSummaryScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: leaderboard,
-      page: () => LeaderboardScreen(), // ✅ Registered Leaderboard Screen
+      page: () => LeaderboardScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
+    ),
+    GetPage(
+      // ✅ Registered MatchScreen
+      name: matchScreen,
+      page: () => const MatchScreen(),
+      transition: Transition.rightToLeft,
+      // transitionDuration: Duration(milliseconds: 500),
     ),
   ];
 }

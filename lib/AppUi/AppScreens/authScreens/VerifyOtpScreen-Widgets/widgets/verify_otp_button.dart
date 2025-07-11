@@ -10,53 +10,52 @@ class VerifyOtpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: ElevatedButton(
-            onPressed: () {
-              String enteredOtp =
-                  controller.otpDigits.map((e) => e.value).join();
+    return Obx(
+      () => SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+          onPressed: () {
+            String enteredOtp = controller.otpDigits.map((e) => e.value).join();
 
-              if (enteredOtp.length < 4) {
-                // 🔥 Invalid OTP Alert
-                Get.snackbar(
-                  "Invalid OTP",
-                  "Please enter the 4-digit OTP.",
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.red.shade600,
-                  colorText: Colors.white,
-                );
+            if (enteredOtp.length < 4) {
+              // 🔥 Invalid OTP Alert
+              Get.snackbar(
+                "Invalid OTP",
+                "Please enter the 4-digit OTP.",
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.red.shade600,
+                colorText: Colors.white,
+              );
 
-                // 🔥 Start Resend Timer
-                if (!controller.isTimerRunning.value) {
-                  controller.startResendTimer();
-                }
-              } else {
-                controller.isButtonGreen.value = true;
-
-                // ✅ Navigate to Complete Profile
-                Get.offAllNamed(AppRoutes.completeProfile);
+              // 🔥 Start Resend Timer
+              if (!controller.isTimerRunning.value) {
+                controller.startResendTimer();
               }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: controller.isButtonGreen.value
-                  ? Colors.green
-                  : const Color(0xFFABAFB3),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: const Text(
-              "VERIFY OTP",
-              style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+            } else {
+              // ✅ Navigate to Complete Profile
+              Get.offAllNamed(AppRoutes.completeProfile);
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: controller.isButtonGreen.value
+                ? Colors.green
+                : const Color(0xFFABAFB3),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
-        ));
+          child: const Text(
+            "VERIFY OTP",
+            style: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
