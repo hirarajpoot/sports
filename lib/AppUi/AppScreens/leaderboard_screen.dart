@@ -14,6 +14,7 @@ class LeaderboardScreen extends StatelessWidget {
     final titleFontSize = size.width < 600 ? 20.0 : 28.0;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           const BackgroundLayer(),
@@ -247,6 +248,7 @@ class LeaderboardScreen extends StatelessWidget {
       ],
     );
   }
+
   Widget _strikerContent() {
     return Center(
       child: Column(
@@ -267,6 +269,7 @@ class LeaderboardScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _midfielderContent() {
     return ListView(
       padding: const EdgeInsets.all(8),
@@ -285,6 +288,7 @@ class LeaderboardScreen extends StatelessWidget {
       }),
     );
   }
+
   Widget _goalkeeperContent() {
     return Center(
       child: Column(

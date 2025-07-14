@@ -44,7 +44,6 @@ class AppRoutes {
       name: signup,
       page: () => SignupScreen(),
       transition: Transition.downToUp,
-      transitionDuration: Duration(milliseconds: 200),
     ),
     GetPage(
       name: verifyOtp,

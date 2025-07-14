@@ -13,7 +13,7 @@ class CustomDrawer extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.75,
-            color: const Color(0xFF2E8A57), // Green background
+            color: const Color(0xFF2E8A57), 
             child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(

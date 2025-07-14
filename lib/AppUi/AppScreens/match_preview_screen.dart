@@ -64,8 +64,8 @@ class MatchPreviewScreen extends StatelessWidget {
               onPressed: ctrl.onReadyTapped,
               style: ElevatedButton.styleFrom(
                 backgroundColor: ctrl.isReady.value
-                    ? const Color(0xFF28A745) // Green when ready
-                    : const Color(0xFF1A9A5D), // Original color
+                    ? const Color(0xFF28A745) 
+                    : const Color(0xFF1A9A5D), 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

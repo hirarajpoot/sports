@@ -14,6 +14,7 @@ class AddPlayersScreen extends StatelessWidget {
     final controller = Get.put(AddPlayersController());
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           const BackgroundLayer(),
