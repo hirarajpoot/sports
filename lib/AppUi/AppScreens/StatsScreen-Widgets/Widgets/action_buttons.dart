@@ -29,7 +29,7 @@ class ActionButtons extends StatelessWidget {
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF11CE07),
+          backgroundColor: const Color(0xFF1A9A5D),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: EdgeInsets.symmetric(
             horizontal: isWide ? 24 : 20,

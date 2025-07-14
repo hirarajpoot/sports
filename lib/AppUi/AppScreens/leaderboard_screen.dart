@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
 import '../Controllers/auth-controllers/leaderboard_controller.dart';
-import '../Models/leaderboard_user_model.dart';
 
 class LeaderboardScreen extends StatelessWidget {
-  const LeaderboardScreen({Key? key}) : super(key: key);
+  const LeaderboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,84 +12,6 @@ class LeaderboardScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final horizontalPadding = size.width * 0.05;
     final titleFontSize = size.width < 600 ? 20.0 : 28.0;
-
-    final users = <LeaderboardUserModel>[
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-
-      LeaderboardUserModel(
-        name: 'Lana Steiner',
-        username: '@lana',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 7,
-      ),
-      LeaderboardUserModel(
-        name: 'Phoenix Baker',
-        username: '@phoenix',
-        image: 'assets/images/lona.png',
-        games: 3,
-        goals: 5,
-      ),
-      LeaderboardUserModel(
-        name: 'Ella French',
-        username: '@ella',
-        image: 'assets/images/User image.png',
-        games: 6,
-        goals: 8,
-      ),
-      LeaderboardUserModel(
-        name: 'Zara Khan',
-        username: '@zara',
-        image: 'assets/images/lona.png',
-        games: 2,
-        goals: 4,
-      ),
-      LeaderboardUserModel(
-        name: 'Ahmed Raza',
-        username: '@ahmed',
-        image: 'assets/images/lona.png',
-        games: 7,
-        goals: 10,
-      ),
-    ].obs;
 
     return Scaffold(
       body: Stack(
@@ -127,6 +48,8 @@ class LeaderboardScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
+
+                  // 🟢 Tabs Row
                   Obx(
                     () => SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -176,148 +99,207 @@ class LeaderboardScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    height: 45,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 6,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 16,
-                          height: 16,
-                          margin: const EdgeInsets.only(right: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 0.82,
-                            ),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        const Text(
-                          'Name',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Text(
-                          'Games',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
-                          ),
-                        ),
-                        const SizedBox(width: 20),
-                        const Text(
-                          'Goals',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(height: 0),
-                  Obx(
-                    () => Expanded(
-                      child: ListView.builder(
-                        itemCount: users.length,
-                        itemBuilder: (_, i) {
-                          final user = users[i];
-                          return GestureDetector(
-                            onTap: () => ctrl.goToNextScreenIfFirst(i),
-                            child: Container(
-                              height: 59,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.grey.shade300,
-                                  ),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 24,
-                                    child: Center(
-                                      child: Text(
-                                        '${i + 1}',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: AssetImage(user.image),
-                                    onBackgroundImageError: (_, __) =>
-                                        debugPrint(
-                                          'Image not found: ${user.image}',
-                                        ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          user.name,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        Text(
-                                          user.username,
-                                          style: TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    '${user.games}',
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Text(
-                                    '${user.goals}',
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+
+                  // 🟢 Dynamic Content Based on Tab
+                  Expanded(
+                    child: Obx(() {
+                      switch (ctrl.selectedIndex.value) {
+                        case 0:
+                          return _originalManOfTheMatchContent(ctrl);
+                        case 1:
+                          return _strikerContent();
+                        case 2:
+                          return _midfielderContent();
+                        case 3:
+                          return _goalkeeperContent();
+                        default:
+                          return const SizedBox();
+                      }
+                    }),
                   ),
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _originalManOfTheMatchContent(LeaderboardController ctrl) {
+    return Column(
+      children: [
+        Container(
+          height: 45,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 6,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 16,
+                height: 16,
+                margin: const EdgeInsets.only(right: 8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 0.82),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const Text(
+                'Name',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+              ),
+              const Spacer(),
+              const Text(
+                'Games',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+              ),
+              const SizedBox(width: 20),
+              const Text(
+                'Goals',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+        const Divider(height: 0),
+        Expanded(
+          child: ListView.builder(
+            itemCount: ctrl.users.length,
+            itemBuilder: (_, i) {
+              final user = ctrl.users[i];
+              return GestureDetector(
+                onTap: () => ctrl.goToNextScreenIfFirst(i),
+                child: Container(
+                  height: 59,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey.shade300),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 24,
+                        child: Center(
+                          child: Text(
+                            '${i + 1}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage(user.image),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              user.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                              user.username,
+                              style: TextStyle(
+                                color: Colors.grey.shade600,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        '${user.games}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      const SizedBox(width: 20),
+                      Text(
+                        '${user.goals}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+  Widget _strikerContent() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.sports_soccer, size: 80, color: Colors.green),
+          const SizedBox(height: 20),
+          const Text(
+            "Top Strikers of the Season!",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Players who scored the most goals.",
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+  Widget _midfielderContent() {
+    return ListView(
+      padding: const EdgeInsets.all(8),
+      children: List.generate(5, (index) {
+        return Card(
+          elevation: 2,
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          child: ListTile(
+            leading: const Icon(Icons.person, color: Colors.blue),
+            title: Text("Midfielder ${index + 1}"),
+            subtitle: const Text("Assist King of the match"),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: () {},
+          ),
+        );
+      }),
+    );
+  }
+  Widget _goalkeeperContent() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.sports_handball, size: 80, color: Colors.orange),
+          const SizedBox(height: 20),
+          const Text(
+            "Top Goal Keepers",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Best keepers with clean sheets.",
+            style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
         ],
       ),

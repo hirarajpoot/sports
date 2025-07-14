@@ -8,6 +8,7 @@ import 'StatsScreen-Widgets/Widgets/action_buttons.dart';
 import 'StatsScreen-Widgets/Widgets/info_rows.dart';
 import 'StatsScreen-Widgets/Widgets/tabs_row.dart';
 import 'StatsScreen-Widgets/Widgets/stats_boxes_row.dart';
+import 'StatsScreen-Widgets/Widgets/start_match_button.dart'; // ✅ Added import
 
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
@@ -16,6 +17,7 @@ class StatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cont = Get.put(StatsController());
     final isWide = MediaQuery.of(context).size.width > 600;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -52,6 +54,9 @@ class StatsScreen extends StatelessWidget {
                   TabsRow(isWide: isWide, controller: cont),
                   const SizedBox(height: 16),
                   StatsBoxesRow(isWide: isWide),
+                  const Spacer(), // ✅ Push button to bottom
+                  const StartMatchButton(), // ✅ Added Start Match button
+                  const SizedBox(height: 16), // Bottom margin
                 ],
               ),
             ),

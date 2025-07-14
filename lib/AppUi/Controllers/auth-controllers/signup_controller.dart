@@ -9,6 +9,6 @@ class SignupController extends GetxController {
   }
 
   void goToNextScreen() {
-    Get.toNamed('/verify-otp'); 
+    Get.toNamed('/verify-otp');
   }
 }

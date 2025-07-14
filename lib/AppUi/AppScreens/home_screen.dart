@@ -26,16 +26,62 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  /// 🔘 Header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CircleAvatar(
-                        radius: 18,
-                        backgroundImage: AssetImage(
-                          'assets/images/Ellipse 64.png',
-                        ),
+                      Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 18,
+                            backgroundImage: AssetImage(
+                              'assets/images/Ellipse 64.png',
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 200,
+                                height: 20,
+                                child: Text(
+                                  "Hi, Akshay!",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 12,
+                                    color: Color(0xFF8BC83F), // ✅ #8BC83F
+                                  ),
+                                  const SizedBox(width: 4),
+                                  const Text(
+                                    "Street, City, State, Zip Code, Country",
+                                    style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400, // Regular
+                                      fontSize:
+                                          12, // Slightly smaller for address
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
+
+                      // 🔥 Right: Notification & Menu icons
                       Row(
                         children: [
                           Image.asset(
@@ -53,9 +99,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 40),
 
-                  /// 🔘 Action Buttons
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -68,8 +114,6 @@ class HomeScreen extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 24),
-
-                  /// 🔘 Social-style post
                   _centeredPostCard(isWide),
 
                   const Spacer(),
@@ -83,7 +127,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  /// ✅ Reusable styled button
   Widget _homeButton(String title) {
     return SizedBox(
       width: 146,
@@ -107,7 +150,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  /// ✅ Social-style post widget
   Widget _centeredPostCard(bool isWide) {
     final RxBool isLiked = false.obs;
 
@@ -130,7 +172,6 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// 👤 User Info Row
             Row(
               children: [
                 const CircleAvatar(
@@ -158,8 +199,6 @@ class HomeScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 10),
-
-            /// 📝 Description
             const Text(
               'What a thrilling match today between the Warriors and Titans! Unforgettable moments!',
               style: TextStyle(
@@ -170,7 +209,6 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            /// 🖼️ Image with Border
             Container(
               width: double.infinity,
               height: 180,
@@ -188,8 +226,6 @@ class HomeScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 10),
-
-            /// ❤️ Action Row with Like Toggle
             Obx(
               () => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

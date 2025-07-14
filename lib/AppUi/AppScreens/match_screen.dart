@@ -347,7 +347,6 @@ class _MatchScreenState extends State<MatchScreen> {
     );
   }
 
-  // 🔥 Helper to calculate dynamic text width
   double _getTextWidth(String text, BuildContext context) {
     final textPainter = TextPainter(
       text: TextSpan(

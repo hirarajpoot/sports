@@ -19,30 +19,20 @@ class SendOtpButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         child: ElevatedButton(
-          onPressed: () {
-            String phone = phoneController.text.trim();
-            if (phone.length == 10 && RegExp(r'^[0-9]+$').hasMatch(phone)) {
-              controller.isButtonGreen.value = true;
-              controller.goToNextScreen();
-            } else {
-              Get.snackbar(
-                "Invalid Number",
-                "Please enter a valid 10-digit mobile number",
-                snackPosition: SnackPosition.TOP,
-                backgroundColor: Colors.red.shade600,
-                colorText: Colors.white,
-              );
-            }
-          },
+          onPressed: controller.isButtonGreen.value
+              ? () {
+                  controller.goToNextScreen();
+                }
+              : null, // 🔥 Disable if not green
           style: ElevatedButton.styleFrom(
             backgroundColor: controller.isButtonGreen.value
                 ? Colors.green
-                : Color(0xFFABAFB3),
+                : const Color(0xFFABAFB3),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(
+          child: const Text(
             "SEND OTP",
             style: TextStyle(
               fontFamily: 'Inter',

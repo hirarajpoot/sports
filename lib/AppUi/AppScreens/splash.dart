@@ -92,7 +92,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                         width: fieldWidth,
                         height: 25,
                         decoration: BoxDecoration(
-                          color: Colors.transparent, // ✅ Background removed
+                          color: Colors.transparent, 
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(color: Colors.white, width: 1.5),
                         ),
