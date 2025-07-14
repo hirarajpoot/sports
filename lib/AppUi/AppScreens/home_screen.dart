@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+
 import '../Controllers/auth-controllers/home_controller.dart';
 import 'HomeScreen-Widgets/Widgets/bottom_nav_bar.dart';
 import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
+import '../widgets/Common-Widgets/custom_drawer.dart';
+import '../widgets/Common-Widgets/notifications_view.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final HomeController controller = Get.put(HomeController());
+  final RxBool showDrawer = false.obs;
+  final RxBool showNotifications = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +67,15 @@ class HomeScreen extends StatelessWidget {
                                   const Icon(
                                     Icons.location_on,
                                     size: 12,
-                                    color: Color(0xFF8BC83F), // ✅ #8BC83F
+                                    color: Color(0xFF8BC83F),
                                   ),
                                   const SizedBox(width: 4),
                                   const Text(
                                     "Street, City, State, Zip Code, Country",
                                     style: TextStyle(
                                       fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400, // Regular
-                                      fontSize:
-                                          12, // Slightly smaller for address
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -80,47 +85,58 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-
-                      // 🔥 Right: Notification & Menu icons
                       Row(
                         children: [
-                          Image.asset(
-                            'assets/icons/bell.png',
-                            width: 24,
-                            height: 24,
+                          GestureDetector(
+                            onTap: () => showNotifications.value = true,
+                            child: Image.asset(
+                              'assets/icons/bell.png',
+                              width: 24,
+                              height: 24,
+                            ),
                           ),
                           const SizedBox(width: 16),
-                          Image.asset(
-                            'assets/icons/menu.png',
-                            width: 24,
-                            height: 24,
+                          GestureDetector(
+                            onTap: () => showDrawer.value = true,
+                            child: Image.asset(
+                              'assets/icons/menu.png',
+                              width: 24,
+                              height: 24,
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 40),
-
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         _homeButton('Start Match'),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 14),
                         _homeButton('Find Sponsors'),
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 24),
                   _centeredPostCard(isWide),
-
                   const Spacer(),
                 ],
               ),
             ),
           ),
+          Obx(() {
+            if (showDrawer.value) {
+              return CustomDrawer(onClose: () => showDrawer.value = false);
+            } else if (showNotifications.value) {
+              return NotificationsView(
+                onClose: () => showNotifications.value = false,
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          }),
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),
@@ -151,7 +167,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _centeredPostCard(bool isWide) {
-    final RxBool isLiked = false.obs;
+    final RxBool isCheered = false.obs;
 
     return Center(
       child: Container(
@@ -197,7 +213,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 10),
             const Text(
               'What a thrilling match today between the Warriors and Titans! Unforgettable moments!',
@@ -208,7 +223,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-
             Container(
               width: double.infinity,
               height: 180,
@@ -224,60 +238,134 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 10),
             Obx(
               () => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () => isLiked.toggle(),
+                    onTap: () => isCheered.toggle(),
                     child: Row(
                       children: [
                         Icon(
-                          Icons.thumb_up_alt,
+                          Icons.celebration,
                           size: 20,
-                          color: isLiked.value ? Colors.green : Colors.grey,
+                          color: isCheered.value ? Colors.green : Colors.grey,
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Like',
+                          'Cheer up',
                           style: TextStyle(
                             fontSize: 13,
-                            color: isLiked.value ? Colors.green : Colors.grey,
+                            color: isCheered.value ? Colors.green : Colors.grey,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.comment_outlined,
-                        size: 20,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        'Comment',
-                        style: TextStyle(fontSize: 13, color: Colors.grey),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () => _showCommentSheet(Get.context!),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.mode_comment_outlined,
+                          size: 20,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Comment',
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: const [
-                      Icon(Icons.share_outlined, size: 20, color: Colors.grey),
-                      SizedBox(width: 8),
-                      Text(
-                        'Share',
-                        style: TextStyle(fontSize: 13, color: Colors.grey),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      const message =
+                          'What a thrilling match!\nCheck it out:\nhttps://example.com/match';
+                      Share.share(message);
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.share_outlined,
+                          size: 20,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Share',
+                          style: TextStyle(fontSize: 13, color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _showCommentSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (context) => Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          height: 300,
+          child: Column(
+            children: [
+              const Text(
+                "Add a comment",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Write your comment...",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                ),
+                maxLines: 3,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Get.snackbar(
+                    "Comment Added",
+                    "Your comment has been posted.",
+                    backgroundColor: Colors.green.shade600,
+                    colorText: Colors.white,
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2E8A57),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  "Post Comment",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
