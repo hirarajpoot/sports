@@ -21,7 +21,7 @@ class CompleteProfileScreen extends StatelessWidget {
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal: isWide ? 100 : 24,
-              vertical: 40,
+              vertical: 10, 
             ),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 500),
@@ -40,26 +40,27 @@ class CompleteProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ProfileHeader(isWide: isWide),
+                      const SizedBox(height: 25), 
                       EditableField(
                         label: "First Name",
                         controller: controller.firstNameController,
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 15), // Between fields
                       EditableField(
                         label: "Last Name",
                         controller: controller.lastNameController,
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 15), // Between fields
                       EditableField(
                         label: "Email ID",
                         controller: controller.emailController,
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 15), // Between fields
                       EditableField(
                         label: "Phone",
                         controller: controller.phoneController,
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 100), // Phone → Done button
                       DoneButton(controller: controller),
                     ],
                   ),

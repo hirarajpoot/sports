@@ -9,19 +9,18 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 1), // ✅ Tight top spacing
+      padding: const EdgeInsets.only(top: 10), // ✅ Top spacing
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 🔥 Back button (now using IconButton for bigger tap area)
               IconButton(
-                padding: EdgeInsets.zero, // Remove default padding
-                constraints: const BoxConstraints(), // Remove size constraints
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
                 onPressed: () {
-                  Get.back(); // ✅ Navigate back
+                  Get.back();
                 },
                 icon: const Icon(
                   Icons.chevron_left,
@@ -29,7 +28,7 @@ class ProfileHeader extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
-              const Spacer(), // Push heading to center
+              const Spacer(),
               Text(
                 "Complete Profile",
                 style: TextStyle(
@@ -41,16 +40,12 @@ class ProfileHeader extends StatelessWidget {
               const Spacer(),
             ],
           ),
-
-          const SizedBox(height: 50),
-
+          const SizedBox(height: 5),
           const CircleAvatar(
             radius: 36,
             backgroundImage: AssetImage('assets/images/User image.png'),
           ),
-
-          const SizedBox(height: 30),
-
+          const SizedBox(height: 5),
           Text(
             "Itunuoluwa Abidoye",
             style: TextStyle(
@@ -59,9 +54,7 @@ class ProfileHeader extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-
-          const SizedBox(height: 30),
-
+          const SizedBox(height: 10),
           TextButton(
             onPressed: () {},
             child: const Text(
@@ -73,8 +66,6 @@ class ProfileHeader extends StatelessWidget {
               ),
             ),
           ),
-
-          const SizedBox(height: 12),
         ],
       ),
     );

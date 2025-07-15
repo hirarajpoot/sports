@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../Controllers/auth-controllers/team_selection_controller.dart';
 import '../AppScreens/TeamSelection-Widgets/top_bar.dart';
 import 'TeamSelection-Widgets/info_box.dart';
-import '../AppScreens/TeamSelection-Widgets/select_club_switch.dart';
 import '../AppScreens/TeamSelection-Widgets/team_card.dart';
 import '../AppScreens/TeamSelection-Widgets/vs_circle.dart';
 
@@ -35,7 +34,6 @@ class TeamSelectionScreen extends StatelessWidget {
                 const SizedBox(height: kToolbarHeight + 16),
                 InfoBox(baseFont: baseFont),
                 const SizedBox(height: 24),
-                SelectClubSwitch(baseFont: baseFont, controller: controller),
                 const SizedBox(height: 32),
                 TeamCard(
                   baseFont: baseFont,

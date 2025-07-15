@@ -19,13 +19,9 @@ class StartMatchButton extends StatelessWidget {
           onPressed: () {
             // TODO: Add navigation or action here
           },
-          icon: Image.asset(
-            'assets/images/football.png',
-            width: 22,
-            height: 22,
-          ),
+         
           label: const Text(
-            "Start Match",
+            "Find Sponsors",
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'Inter', // ✅ Font Inter

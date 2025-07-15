@@ -13,7 +13,7 @@ class MatchContainer extends StatelessWidget {
     return Center(
       child: Container(
         width: 336,
-        height: 409,
+        height: 350,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -25,6 +25,13 @@ class MatchContainer extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(10),
+          // ✅ Add shadow ONLY to bottom border
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.black.withOpacity(0.2), // Shadow color
+              width: 4, // Thickness of shadow
+            ),
+          ),
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -35,20 +42,7 @@ class MatchContainer extends StatelessWidget {
               right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _teamWithScore(
-                    name: 'TEAM 1',
-                    score: ctrl.score1.value,
-                    borderColor: Colors.green,
-                    onChanged: (val) => ctrl.score1.value = val,
-                  ),
-                  _teamWithScore(
-                    name: 'TEAM 2',
-                    score: ctrl.score2.value,
-                    borderColor: Colors.red,
-                    onChanged: (val) => ctrl.score2.value = val,
-                  ),
-                ],
+                children: [_teamLogo(isLeft: true), _teamLogo(isLeft: false)],
               ),
             ),
             Positioned(top: 150, child: const VsCircle(isWide: false)),
@@ -65,76 +59,125 @@ class MatchContainer extends StatelessWidget {
                 ),
               ),
             ),
+            // 🔥 Scores & Buttons
+            Positioned(
+              bottom: 16,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _scoreWithButtons(
+                    score: ctrl.score1,
+                    increment: ctrl.incrementScore1,
+                    decrement: ctrl.decrementScore1,
+                  ),
+                  _scoreWithButtons(
+                    score: ctrl.score2,
+                    increment: ctrl.incrementScore2,
+                    decrement: ctrl.decrementScore2,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _teamWithScore({
-    required String name,
-    required int score,
-    required Color borderColor,
-    required Function(int) onChanged,
+  Widget _teamLogo({required bool isLeft}) {
+    return Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: isLeft ? Colors.green : Colors.red,
+          width: 10,
+        ),
+      ),
+      child: ClipOval(
+        child: Image.asset('assets/images/football.png', fit: BoxFit.cover),
+      ),
+    );
+  }
+
+  Widget _scoreWithButtons({
+    required RxInt score,
+    required VoidCallback increment,
+    required VoidCallback decrement,
   }) {
-    final controller = TextEditingController(text: score.toString());
     return Column(
       children: [
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: borderColor, width: 10),
-          ),
-          child: ClipOval(
-            child: Image.asset('assets/images/football.png', fit: BoxFit.cover),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          name,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            fontFamily: 'Inter',
-            decoration: TextDecoration.none,
-          ),
-        ),
-        const SizedBox(height: 30),
-        const Text(
-          'Goal',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Inter',
-            color: Colors.black,
-            decoration: TextDecoration.none,
-          ),
-        ),
-        const SizedBox(height: 6),
-        SizedBox(
-          width: 42,
-          height: 42,
-          child: TextField(
-            textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
-            controller: controller,
-            onChanged: (v) => onChanged(int.tryParse(v) ?? 0),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 6),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(color: Colors.black, width: 2),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: const BorderSide(color: Colors.black, width: 2),
+        // Score Text
+        Obx(
+          () => Container(
+            width: 38,
+            height: 73,
+            alignment: Alignment.center,
+            child: Text(
+              '${score.value}',
+              style: const TextStyle(
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+                fontSize: 60,
+                color: Colors.black,
+                decoration: TextDecoration.none,
               ),
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        // ➖ ➕ Buttons
+        Row(
+          children: [
+            _circleButton(
+              icon: '-',
+              bgColor: const Color(0xFFFF0000),
+              textColor: Colors.white,
+              onTap: decrement,
+            ),
+            const SizedBox(width: 6),
+            _circleButton(
+              icon: '+',
+              bgColor: Colors.white,
+              textColor: Colors.black,
+              onTap: increment,
+            ),
+          ],
+        ),
       ],
+    );
+  }
+
+  Widget _circleButton({
+    required String icon,
+    required Color bgColor,
+    required Color textColor,
+    required VoidCallback onTap,
+  }) {
+    return SizedBox(
+      width: 33,
+      height: 33,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
+          shape: const CircleBorder(),
+          padding: EdgeInsets.zero,
+          elevation: 2,
+        ),
+        child: Text(
+          icon,
+          style: TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 20,
+            color: textColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }

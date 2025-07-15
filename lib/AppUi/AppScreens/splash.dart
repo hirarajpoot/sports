@@ -17,10 +17,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
 
     _controller =
-        AnimationController(
-            duration: const Duration(seconds: 3), // ✅ Fast 3s animation
-            vsync: this,
-          )
+        AnimationController(duration: const Duration(seconds: 3), vsync: this)
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
               Get.offAllNamed(AppRoutes.meet);
@@ -38,7 +35,8 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     double fieldWidth = MediaQuery.of(context).size.width * 0.8;
-    double ballSize = 24;
+    double fieldHeight = 28; 
+    double ballSize = 40;    
 
     return Scaffold(
       body: Container(
@@ -76,7 +74,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                     ),
                     const SizedBox(height: 30),
                     Container(
-                      height: 28,
+                      height: fieldHeight,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.white, width: 1.5),
@@ -90,7 +88,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                             children: [
                               Positioned(
                                 left: pos,
-                                top: (28 - ballSize) / 2,
+                                top: -(ballSize - fieldHeight) / 2, 
                                 child: child!,
                               ),
                             ],

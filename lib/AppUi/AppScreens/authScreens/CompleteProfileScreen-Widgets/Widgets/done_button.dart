@@ -9,7 +9,7 @@ class DoneButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5), 
+      padding: const EdgeInsets.only(bottom: 15), // ✅ Bottom spacing = 15px
       child: SizedBox(
         width: double.infinity,
         height: 50,
