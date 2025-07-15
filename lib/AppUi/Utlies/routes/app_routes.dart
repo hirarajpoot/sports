@@ -18,6 +18,7 @@ import '../../AppScreens/match_summary_screen.dart';
 import '../../AppScreens/leaderboard_screen.dart';
 import '../../AppScreens/match_screen.dart';
 import '../../AppScreens/create_tournament_screen.dart';
+import '../../AppScreens/tournament_preview_screen.dart'; // ✅ Imported TournamentPreviewScreen
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -38,6 +39,7 @@ class AppRoutes {
   static const String leaderboard = '/leaderboard';
   static const String matchScreen = '/match-screen';
   static const String createTournament = '/create-tournament';
+  static const String tournamentPreview = '/tournament-preview'; // ✅ New route
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -118,9 +120,15 @@ class AppRoutes {
       transition: Transition.rightToLeft,
     ),
     GetPage(
-      // ✅ Register CreateTournamentScreen
       name: createTournament,
       page: () => CreateTournamentScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
+    GetPage(
+      // ✅ Registered TournamentPreviewScreen
+      name: tournamentPreview,
+      page: () => const TournamentPreviewScreen(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),

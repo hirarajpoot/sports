@@ -29,7 +29,7 @@ class CreateTournamentController extends GetxController {
     Get.bottomSheet(
       SafeArea(
         child: Container(
-          height: 250, 
+          height: 250,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
@@ -70,7 +70,7 @@ class CreateTournamentController extends GetxController {
           ),
         ),
       ),
-      isScrollControlled: false, 
+      isScrollControlled: false,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
@@ -78,6 +78,6 @@ class CreateTournamentController extends GetxController {
   }
 
   void startTournament() {
-    Get.toNamed('/next-screen'); 
+    Get.toNamed('tournament-preview');
   }
 }
