@@ -17,6 +17,7 @@ import '../../AppScreens/live_match_screen.dart';
 import '../../AppScreens/match_summary_screen.dart';
 import '../../AppScreens/leaderboard_screen.dart';
 import '../../AppScreens/match_screen.dart';
+import '../../AppScreens/create_tournament_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -36,6 +37,7 @@ class AppRoutes {
   static const String matchSummary = '/match-summary';
   static const String leaderboard = '/leaderboard';
   static const String matchScreen = '/match-screen';
+  static const String createTournament = '/create-tournament';
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -111,11 +113,16 @@ class AppRoutes {
       transition: Transition.rightToLeft,
     ),
     GetPage(
-      // ✅ Registered MatchScreen
       name: matchScreen,
       page: () => const MatchScreen(),
       transition: Transition.rightToLeft,
-      // transitionDuration: Duration(milliseconds: 500),
+    ),
+    GetPage(
+      // ✅ Register CreateTournamentScreen
+      name: createTournament,
+      page: () => CreateTournamentScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
     ),
   ];
 }

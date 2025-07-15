@@ -15,7 +15,7 @@ class ActionButtons extends StatelessWidget {
       ),
       _actionButton(
         title: "Start Tournament",
-        onPressed: () => Get.toNamed('/start-tournament'), 
+        onPressed: () => Get.toNamed('/create-tournament'),
       ),
     ],
   );
