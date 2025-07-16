@@ -8,7 +8,7 @@ import 'StatsScreen-Widgets/Widgets/action_buttons.dart';
 import 'StatsScreen-Widgets/Widgets/info_rows.dart';
 import 'StatsScreen-Widgets/Widgets/tabs_row.dart';
 import 'StatsScreen-Widgets/Widgets/stats_boxes_row.dart';
-import 'StatsScreen-Widgets/Widgets/start_match_button.dart'; 
+import 'StatsScreen-Widgets/Widgets/start_match_button.dart';
 
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
@@ -49,14 +49,14 @@ class StatsScreen extends StatelessWidget {
                   const SizedBox(height: 36),
                   ActionButtons(isWide: isWide),
                   const SizedBox(height: 16),
-                  InfoRows(isWide: isWide, controller: cont),
+                  InfoRows(isWide: isWide),
                   const SizedBox(height: 24),
                   TabsRow(isWide: isWide, controller: cont),
                   const SizedBox(height: 16),
                   StatsBoxesRow(isWide: isWide),
-                  const Spacer(), 
-                  const StartMatchButton(), 
-                  const SizedBox(height: 16), 
+                  const Spacer(),
+                  const StartMatchButton(),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../Controllers/auth-controllers/stats_controller.dart';
 
 class StartMatchButton extends StatelessWidget {
   const StartMatchButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<StatsController>();
+
     return Center(
       child: SizedBox(
         width: 350,
         height: 56,
-        child: ElevatedButton.icon(
+        child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF2E8A57), // ✅ #2E8A57
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12), // ✅ Radius 12
-            ),
+            backgroundColor: const Color(0xFF2E8A57),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          onPressed: () {
-            // TODO: Add navigation or action here
-          },
-         
-          label: const Text(
+          onPressed: controller.findSponsors,
+          child: const Text(
             "Find Sponsors",
             style: TextStyle(
               color: Colors.white,
-              fontFamily: 'Inter', // ✅ Font Inter
-              fontWeight: FontWeight.w600, // ✅ Semi-bold
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
               fontSize: 16,
             ),
           ),
