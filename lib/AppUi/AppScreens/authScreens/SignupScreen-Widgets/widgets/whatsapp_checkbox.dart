@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import '../../../../Controllers/auth-controllers/signup_controller.dart';
 
 class WhatsappCheckbox extends StatelessWidget {
-  final SignupController controller;
+  WhatsappCheckbox({super.key});
 
-  const WhatsappCheckbox({super.key, required this.controller});
+  final SignupController controller = Get.find<SignupController>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class WhatsappCheckbox extends StatelessWidget {
               onChanged: controller.toggleWhatsapp,
               activeColor: Colors.green,
             ),
-            Expanded(
+            const Expanded(
               child: Text(
                 "I agree to receive updates over WhatsApp",
                 style: TextStyle(

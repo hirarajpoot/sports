@@ -46,11 +46,18 @@ class HomeController extends GetxController {
         imageUrl: "assets/images/match.jpg",
       ),
       PostModel(
-        author: "Sports Hub",
-        timeAgo: "5 hours ago",
+        author: "Elite Club",
+        timeAgo: "2 hours ago",
         content:
-            "A close match between Team X and Team Y! Highlights coming soon.",
-        imageUrl: "assets/images/match2.jpg",
+            "What a thrilling match today between the Warriors and Titans! Unforgettable moments!",
+        imageUrl: "assets/images/match 2.jpg",
+      ),
+      PostModel(
+        author: "Elite Club",
+        timeAgo: "2 hours ago",
+        content:
+            "What a thrilling match today between the Warriors and Titans! Unforgettable moments!",
+        imageUrl: "assets/images/match 1.jpg",
       ),
     ];
   }

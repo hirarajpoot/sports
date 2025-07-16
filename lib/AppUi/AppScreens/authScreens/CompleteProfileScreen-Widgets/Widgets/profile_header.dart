@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../Controllers/auth-controllers/complete_profile_controller.dart';
 
 class ProfileHeader extends StatelessWidget {
   final bool isWide;
@@ -8,13 +9,14 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<CompleteProfileController>();
+
     return Padding(
-      padding: const EdgeInsets.only(top: 10), // ✅ Top spacing
+      padding: const EdgeInsets.only(top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
                 padding: EdgeInsets.zero,
@@ -41,22 +43,24 @@ class ProfileHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5),
-          const CircleAvatar(
-            radius: 36,
-            backgroundImage: AssetImage('assets/images/User image.png'),
-          ),
+          Obx(() => CircleAvatar(
+                radius: 36,
+                backgroundImage: AssetImage(controller.userProfile.value.profileImage),
+              )),
           const SizedBox(height: 5),
-          Text(
-            "Itunuoluwa Abidoye",
-            style: TextStyle(
-              fontSize: isWide ? 16 : 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ),
+          Obx(() => Text(
+                "${controller.userProfile.value.firstName} ${controller.userProfile.value.lastName}",
+                style: TextStyle(
+                  fontSize: isWide ? 16 : 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              )),
           const SizedBox(height: 10),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              // TODO: Add edit image functionality
+            },
             child: const Text(
               "Edit",
               style: TextStyle(

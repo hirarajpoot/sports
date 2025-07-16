@@ -3,14 +3,9 @@ import 'package:get/get.dart';
 import '../../../../Controllers/auth-controllers/signup_controller.dart';
 
 class SendOtpButton extends StatelessWidget {
-  final SignupController controller;
-  final TextEditingController phoneController;
+  SendOtpButton({super.key});
 
-  const SendOtpButton({
-    super.key,
-    required this.controller,
-    required this.phoneController,
-  });
+  final SignupController controller = Get.find<SignupController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +15,8 @@ class SendOtpButton extends StatelessWidget {
         height: 50,
         child: ElevatedButton(
           onPressed: controller.isButtonGreen.value
-              ? () {
-                  controller.goToNextScreen();
-                }
-              : null, // 🔥 Disable if not green
+              ? controller.goToNextScreen
+              : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: controller.isButtonGreen.value
                 ? Colors.green

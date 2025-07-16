@@ -11,6 +11,15 @@ class SignupController extends GetxController {
     isWhatsappChecked.value = value ?? false;
   }
 
+  void onPhoneChanged(String value) {
+    // ✅ Validate phone number and enable button
+    if (value.length == 10 && RegExp(r'^[0-9]+$').hasMatch(value)) {
+      isButtonGreen.value = true;
+    } else {
+      isButtonGreen.value = false;
+    }
+  }
+
   void goToNextScreen() {
     Get.offNamed('/verify-otp');
   }

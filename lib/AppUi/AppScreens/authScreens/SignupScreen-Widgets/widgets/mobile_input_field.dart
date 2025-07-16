@@ -3,14 +3,12 @@ import 'package:get/get.dart';
 import '../../../../Controllers/auth-controllers/signup_controller.dart';
 
 class MobileInputField extends StatelessWidget {
-  final TextEditingController controller;
+  MobileInputField({super.key});
 
-  const MobileInputField({super.key, required this.controller});
+  final SignupController controller = Get.find<SignupController>();
 
   @override
   Widget build(BuildContext context) {
-    final signupController = Get.find<SignupController>();
-
     return Row(
       children: [
         Container(
@@ -39,7 +37,7 @@ class MobileInputField extends StatelessWidget {
         const SizedBox(width: 10),
         Expanded(
           child: TextField(
-            controller: controller,
+            controller: controller.phoneController,
             maxLength: 10,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
@@ -63,14 +61,7 @@ class MobileInputField extends StatelessWidget {
               fontSize: 14,
               color: Colors.black,
             ),
-            onChanged: (value) {
-              // ✅ Auto enable/disable Send OTP button
-              if (value.length == 10 && RegExp(r'^[0-9]+$').hasMatch(value)) {
-                signupController.isButtonGreen.value = true;
-              } else {
-                signupController.isButtonGreen.value = false;
-              }
-            },
+            onChanged: controller.onPhoneChanged,
           ),
         ),
       ],

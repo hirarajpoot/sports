@@ -9,7 +9,7 @@ import 'VerifyOtpScreen-Widgets/widgets/resend_otp_timer.dart';
 class VerifyOtpScreen extends StatelessWidget {
   final VerifyOtpController controller = Get.put(VerifyOtpController());
 
-   VerifyOtpScreen({super.key});
+  VerifyOtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class VerifyOtpScreen extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
                   ),
@@ -36,12 +36,12 @@ class VerifyOtpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "You're Almost There !",
                         style: TextStyle(
                           fontFamily: 'Inter',
@@ -50,7 +50,7 @@ class VerifyOtpScreen extends StatelessWidget {
                           color: Colors.black87,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -63,23 +63,23 @@ class VerifyOtpScreen extends StatelessWidget {
                               color: Colors.grey.shade500,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "+91-897654321",
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
-                              color: Colors.grey.shade500,
+                              color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
-                      OtpInputFields(controller: controller),
-                      SizedBox(height: 20),
-                      VerifyOtpButton(controller: controller),
-                      SizedBox(height: 20),
-                      ResendOtpTimer(controller: controller),
+                      const SizedBox(height: 20),
+                      const OtpInputFields(),
+                      const SizedBox(height: 20),
+                      const VerifyOtpButton(),
+                      const SizedBox(height: 20),
+                      const ResendOtpTimer(),
                     ],
                   ),
                 ),

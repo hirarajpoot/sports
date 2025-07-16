@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../Controllers/auth-controllers/verify_otp_controller.dart';
-import '../../../../Utlies/routes/app_routes.dart';
 
 class VerifyOtpButton extends StatelessWidget {
-  final VerifyOtpController controller;
-
-  const VerifyOtpButton({super.key, required this.controller});
+  const VerifyOtpButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final VerifyOtpController controller = Get.find();
+
     return Obx(
       () => SizedBox(
         width: double.infinity,
         height: 50,
         child: ElevatedButton(
-          onPressed: () {
-            String enteredOtp = controller.otpDigits.map((e) => e.value).join();
-
-            if (enteredOtp.length < 4) {
-              // 🔥 Invalid OTP Alert
-              Get.snackbar(
-                "Invalid OTP",
-                "Please enter the 4-digit OTP.",
-                snackPosition: SnackPosition.TOP,
-                backgroundColor: Colors.red.shade600,
-                colorText: Colors.white,
-              );
-
-              // 🔥 Start Resend Timer
-              if (!controller.isTimerRunning.value) {
-                controller.startResendTimer();
-              }
-            } else {
-              // ✅ Navigate to Complete Profile
-              Get.offAllNamed(AppRoutes.completeProfile);
-            }
-          },
+          onPressed: controller.isButtonGreen.value
+              ? controller.verifyOtp
+              : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: controller.isButtonGreen.value
                 ? Colors.green

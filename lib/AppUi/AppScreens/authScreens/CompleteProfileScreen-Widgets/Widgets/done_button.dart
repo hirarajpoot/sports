@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../Controllers/auth-controllers/complete_profile_controller.dart';
 
 class DoneButton extends StatelessWidget {
-  final CompleteProfileController controller;
-
-  const DoneButton({super.key, required this.controller});
+  const DoneButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<CompleteProfileController>();
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15), // ✅ Bottom spacing = 15px
+      padding: const EdgeInsets.only(bottom: 15),
       child: SizedBox(
         width: double.infinity,
         height: 50,

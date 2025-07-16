@@ -19,13 +19,10 @@ class SignupScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const TopSection(), // ✅ Common Header
+            const TopSection(),
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 25,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,19 +46,12 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15),
-
-                    MobileInputField(controller: controller.phoneController),
+                    MobileInputField(),
                     const SizedBox(height: 20),
-
-                    SendOtpButton(
-                      controller: controller,
-                      phoneController: controller.phoneController,
-                    ),
+                    SendOtpButton(),
                     const SizedBox(height: 10),
-
-                    WhatsappCheckbox(controller: controller),
+                    WhatsappCheckbox(),
                     const SizedBox(height: 10),
-
                     const TermsAndPrivacyText(),
                   ],
                 ),
