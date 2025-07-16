@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class CustomAppBar extends StatelessWidget {
   final double Function(double) scale;
 
-  const CustomAppBar({Key? key, required this.scale}) : super(key: key);
+  const CustomAppBar({super.key, required this.scale});
 
   @override
   Widget build(BuildContext context) {

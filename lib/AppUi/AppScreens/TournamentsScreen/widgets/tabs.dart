@@ -6,8 +6,7 @@ class Tabs extends StatelessWidget {
   final double Function(double) scale;
   final TournamentsController controller;
 
-  const Tabs({Key? key, required this.scale, required this.controller})
-      : super(key: key);
+  const Tabs({super.key, required this.scale, required this.controller});
 
   Widget buildTab(String label, int index, double width) {
     return Obx(() {

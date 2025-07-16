@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Controllers/auth-controllers/home_controller.dart';
-import 'HomeScreen-Widgets/Widgets/greeting_header.dart';
-import 'HomeScreen-Widgets/Widgets/action_buttons.dart';
-import 'HomeScreen-Widgets/Widgets/post_card.dart';
-import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
-import '../widgets/Common-Widgets/custom_drawer.dart';
-// import 'HomeScreen-Widgets/Widgets/notifications_screen.dart';
-import 'HomeScreen-Widgets/Widgets/bottom_nav_bar.dart';
+import '../AppScreens/HomeScreen-Widgets/Widgets/greeting_header.dart';
+import '../AppScreens/HomeScreen-Widgets/Widgets/action_buttons.dart';
+import '../AppScreens/HomeScreen-Widgets/Widgets/post_card.dart';
+import '../Widgets/Common-Widgets/custom_drawer.dart';
+import '../AppScreens/HomeScreen-Widgets/Widgets/bottom_nav_bar.dart';
+import '../../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -33,13 +32,24 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 40),
                   const ActionButtons(),
                   const SizedBox(height: 24),
-                  PostCard(isWide: isWide),
-                  const Spacer(),
+                  Expanded(
+                    child: Obx(() {
+                      final posts = controller.posts;
+                      return ListView.builder(
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          return PostCard(post: posts[index]);
+                        },
+                      );
+                    }),
+                  ),
                 ],
               ),
             ),
           ),
-          Obx(() => showDrawer.value ? CustomDrawer(onClose: () => showDrawer.value = false) : const SizedBox.shrink()),
+          Obx(() => showDrawer.value
+              ? CustomDrawer(onClose: () => showDrawer.value = false)
+              : const SizedBox.shrink()),
         ],
       ),
       bottomNavigationBar: const BottomNavBar(),

@@ -6,4 +6,9 @@ class TournamentsController extends GetxController {
   void changeTab(int index) {
     selectedTab.value = index;
   }
+
+  /// Navigate to Challenge Screen on Upcoming card tap
+  void navigateToChallengeScreen() {
+    Get.toNamed('/challenge-screen');
+  }
 }

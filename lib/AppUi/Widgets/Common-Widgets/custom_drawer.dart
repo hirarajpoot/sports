@@ -78,12 +78,12 @@ class CustomDrawer extends StatelessWidget {
                     _drawerItem(Icons.group, "Profile", () {
                       _navigateTo('/complete-profile');
                     }),
-                    _drawerItem(Icons.share, "Documents", () {
-                    }),
+                    _drawerItem(Icons.share, "Documents", () {}),
                     _drawerItem(Icons.alarm, "Match Preview", () {
                       _navigateTo('/match-preview');
                     }),
-                    _drawerItem(Icons.settings, "Delete Account", _onDeleteAccount),
+                    _drawerItem(
+                        Icons.settings, "Delete Account", _onDeleteAccount),
                     const Spacer(),
                     _drawerItem(Icons.logout, "Log out", _onLogout),
                   ],
@@ -100,8 +100,8 @@ class CustomDrawer extends StatelessWidget {
   Widget _drawerItem(IconData icon, String label, VoidCallback onTap) {
     return ListTile(
       onTap: () {
-        onClose(); 
-        onTap();    
+        onClose();
+        onTap();
       },
       leading: Icon(icon, color: Colors.white),
       title: Text(
@@ -120,7 +120,7 @@ class CustomDrawer extends StatelessWidget {
       Center(
         child: Container(
           width: 281,
-          height: 194,
+          height: 194, // ✅ Height preserved
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -138,16 +138,12 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Expanded(
-                child: Text(
-                  "Are you sure you want to delete your account? This action cannot be undone.",
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.visible,
-                  softWrap: true,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black87,
-                  ),
+              const Text(
+                "Are you sure you want to delete your account? This action cannot be undone.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
                 ),
               ),
               Row(
@@ -158,10 +154,10 @@ class CustomDrawer extends StatelessWidget {
                     height: 27,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.back(); 
+                        Get.back();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2E8A57), 
+                        backgroundColor: const Color(0xFF2E8A57),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
                         ),
@@ -181,7 +177,7 @@ class CustomDrawer extends StatelessWidget {
                     height: 27,
                     child: ElevatedButton(
                       onPressed: () async {
-                        Get.back(); 
+                        Get.back();
                         Get.dialog(
                           const Center(child: CircularProgressIndicator()),
                           barrierDismissible: false,
@@ -190,7 +186,7 @@ class CustomDrawer extends StatelessWidget {
 
                         bool success = true;
 
-                        Get.back(); 
+                        Get.back();
                         if (success) {
                           Get.snackbar(
                             "Account Deleted",
@@ -209,7 +205,7 @@ class CustomDrawer extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF1A1A), // Delete button color
+                        backgroundColor: const Color(0xFFFF1A1A),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
                         ),
@@ -240,15 +236,15 @@ class CustomDrawer extends StatelessWidget {
       barrierDismissible: false,
     );
 
-    await Future.delayed(const Duration(seconds: 1)); 
+    await Future.delayed(const Duration(seconds: 1));
 
-    Get.back(); 
+    Get.back();
     Get.snackbar(
       "Logged Out",
       "You have been successfully logged out.",
       backgroundColor: Colors.green,
       colorText: Colors.white,
     );
-    Get.offAllNamed('/login'); 
+    Get.offAllNamed('/login');
   }
 }

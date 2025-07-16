@@ -19,6 +19,9 @@ import '../../AppScreens/create_tournament_screen.dart';
 import '../../AppScreens/tournament_preview_screen.dart';
 import '../../AppScreens/tournament_screen.dart';
 
+// ✅ Import ChallengeScreen
+import '../../AppScreens/challenge_screen.dart';
+
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
   static const String splash = '/splash';
@@ -39,9 +42,8 @@ class AppRoutes {
   static const String matchScreen = '/match-screen';
   static const String createTournament = '/create-tournament';
   static const String tournamentPreview = '/tournament-preview';
-
-  // ✅ New route constant for the screen
   static const String tournamentScreen = '/tournament-screen';
+  static const String challengeScreen = '/challenge-screen';
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -133,11 +135,15 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
-
-    // ✅ Register the TournamentScreen route
     GetPage(
       name: tournamentScreen,
-      page: () => TournamentsScreen(), // class name you used earlier
+      page: () => TournamentsScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: challengeScreen,
+      page: () => ChallengeScreen(),
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),

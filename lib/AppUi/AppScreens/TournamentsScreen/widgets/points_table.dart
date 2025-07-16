@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PointsTable extends StatelessWidget {
   final double Function(double) scale;
 
-  const PointsTable({Key? key, required this.scale}) : super(key: key);
+  const PointsTable({super.key, required this.scale});
 
   @override
   Widget build(BuildContext context) {

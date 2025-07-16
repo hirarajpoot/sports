@@ -11,6 +11,8 @@ import '../AppScreens/TournamentsScreen/widgets/points_table.dart';
 class TournamentsScreen extends StatelessWidget {
   final TournamentsController controller = Get.put(TournamentsController());
 
+   TournamentsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -35,7 +37,7 @@ class TournamentsScreen extends StatelessWidget {
                           return Column(
                             children: [
                               MatchCard(
-                                scale: scale,
+                                // scale: scale,
                                 label: 'UPCOMING',
                                 teamA: 'Alpha',
                                 teamB: 'Beta',
@@ -44,7 +46,7 @@ class TournamentsScreen extends StatelessWidget {
                                 time: 'Today, 7:00 PM',
                               ),
                               MatchCard(
-                                scale: scale,
+                                // scale: scale,
                                 label: 'LIVE',
                                 teamA: 'Gamma',
                                 teamB: 'Delta',
@@ -56,7 +58,7 @@ class TournamentsScreen extends StatelessWidget {
                                 isLive: true,
                               ),
                               MatchCard(
-                                scale: scale,
+                                // scale: scale,
                                 label: 'COMPLETED',
                                 teamA: 'Epsilon',
                                 teamB: 'Zeta',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LeaderboardTable extends StatelessWidget {
   final double Function(double) scale;
 
-  const LeaderboardTable({Key? key, required this.scale}) : super(key: key);
+  const LeaderboardTable({super.key, required this.scale});
 
   @override
   Widget build(BuildContext context) {
