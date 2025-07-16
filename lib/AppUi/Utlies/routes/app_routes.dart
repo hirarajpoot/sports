@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-
-// Screens
 import '../../AppScreens/splash.dart';
 import '../../AppScreens/meet_screen.dart';
 import '../../AppScreens/authScreens/signup_screen.dart';
@@ -18,7 +16,8 @@ import '../../AppScreens/match_summary_screen.dart';
 import '../../AppScreens/leaderboard_screen.dart';
 import '../../AppScreens/match_screen.dart';
 import '../../AppScreens/create_tournament_screen.dart';
-import '../../AppScreens/tournament_preview_screen.dart'; // ✅ Imported TournamentPreviewScreen
+import '../../AppScreens/tournament_preview_screen.dart';
+import '../../AppScreens/tournament_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -39,7 +38,10 @@ class AppRoutes {
   static const String leaderboard = '/leaderboard';
   static const String matchScreen = '/match-screen';
   static const String createTournament = '/create-tournament';
-  static const String tournamentPreview = '/tournament-preview'; // ✅ New route
+  static const String tournamentPreview = '/tournament-preview';
+
+  // ✅ New route constant for the screen
+  static const String tournamentScreen = '/tournament-screen';
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -126,9 +128,16 @@ class AppRoutes {
       transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
-      // ✅ Registered TournamentPreviewScreen
       name: tournamentPreview,
       page: () => const TournamentPreviewScreen(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
+
+    // ✅ Register the TournamentScreen route
+    GetPage(
+      name: tournamentScreen,
+      page: () => TournamentsScreen(), // class name you used earlier
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BackgroundLayer extends StatelessWidget {
-  const BackgroundLayer({super.key});
+  final Widget? child;
+
+  const BackgroundLayer({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {
-    return Transform.translate(
-      offset: const Offset(0, 90), // 👈 shifts image 60 pixels downward
+    Widget background = Transform.translate(
+      offset: const Offset(0, 90),
       child: Opacity(
         opacity: 0.05,
         child: Image.asset(
@@ -17,5 +19,16 @@ class BackgroundLayer extends StatelessWidget {
         ),
       ),
     );
+
+    if (child != null) {
+      return Stack(
+        children: [
+          background,
+          child!,
+        ],
+      );
+    } else {
+      return background;
+    }
   }
 }
