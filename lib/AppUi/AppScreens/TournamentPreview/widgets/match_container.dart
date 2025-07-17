@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MatchContainer extends StatelessWidget {
+  final String team1;
+  final String team2;
   final double opacity;
 
-  const MatchContainer({super.key, required this.opacity});
+  const MatchContainer({
+    super.key,
+    required this.team1,
+    required this.team2,
+    required this.opacity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,43 +22,25 @@ class MatchContainer extends StatelessWidget {
         width: 336,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [
-              Color(0xFFE1DFF8), // Top color
-              Color(0xFFF8DEDF), // Bottom color
-            ],
+            colors: [Color(0xFFE1DFF8), Color(0xFFF8DEDF)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
           borderRadius: BorderRadius.circular(10),
           boxShadow: const [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 4),
-              blurRadius: 8,
-            ),
+            BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 8),
           ],
         ),
         child: Stack(
           children: [
-            Positioned(
-              left: 20,
-              top: 16,
-              child: _teamCircle(Colors.green, 'TEAM 1'),
-            ),
-            Positioned(
-              right: 20,
-              top: 16,
-              child: _teamCircle(Colors.red, 'TEAM 2'),
-            ),
+            Positioned(left: 20, top: 16, child: _teamCircle(Colors.green, team1)),
+            Positioned(right: 20, top: 16, child: _teamCircle(Colors.red, team2)),
             Align(
               alignment: Alignment.center,
               child: Container(
                 width: 34,
                 height: 34,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
                 alignment: Alignment.center,
                 child: const Text(
                   'VS',

@@ -1,49 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
 import '../Controllers/auth-controllers/tournament_preview_controller.dart';
-import '../AppScreens/TournamentPreview/widgets/app_bar.dart';
-import '../AppScreens/TournamentPreview/widgets/match_container.dart';
+import '../../AppUi/AppScreens/AddPlayersScreen-Widgets/widgets/background_layer.dart';
 import '../AppScreens/TournamentPreview/widgets/bottom_info_box.dart';
+import '../AppScreens/TournamentPreview/widgets/match_container.dart';
+import '../AppScreens/TournamentPreview/widgets/app_bar.dart';
 import '../AppScreens/TournamentPreview/widgets/start_button.dart';
 
 class TournamentPreviewScreen extends StatelessWidget {
-  const TournamentPreviewScreen({super.key});
+  TournamentPreviewScreen({super.key});
+
+  final List<String> teams = Get.arguments ?? [];
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(TournamentPreviewController());
-    final isWide = MediaQuery.of(context).size.width > 600;
+    final controller = Get.put(TournamentPreviewController(teams));
 
     return Scaffold(
-      body: Stack(
-        children: [
-          const BackgroundLayer(),
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: isWide ? MediaQuery.of(context).size.width * 0.1 : 16,
-                vertical: 20,
+      backgroundColor: Colors.white,
+      body: BackgroundLayer(
+        child: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+              const CustomAppBar(),
+              const SizedBox(height: 24),
+              Expanded(
+                child: Obx(() => ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: controller.matchups.length,
+                      itemBuilder: (context, index) {
+                        final match = controller.matchups[index];
+                        return MatchContainer(
+                          team1: match['team1']!,
+                          team2: match['team2']!,
+                          opacity: 1.0,
+                        );
+                      },
+                    )),
               ),
-              child: Column(
-                children: [
-                  const CustomAppBar(),
-                  const SizedBox(height: 20),
-                  MatchContainer(opacity: 0.90),
-                  MatchContainer(opacity: 0.90),
-                  MatchContainer(opacity: 0.70), // ✅ Lighter for background peek
-                  MatchContainer(opacity: 0.90),
-                  MatchContainer(opacity: 0.90),
-                  MatchContainer(opacity: 0.90),
-                  const SizedBox(height: 16),
-                  const BottomInfoBox(),
-                  const SizedBox(height: 24),
-                  StartButton(onPressed: controller.startTournament),
-                ],
-              ),
-            ),
+              const SizedBox(height: 12),
+              const BottomInfoBox(),
+              const SizedBox(height: 16),
+              StartButton(onPressed: controller.startTournament),
+              const SizedBox(height: 16),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

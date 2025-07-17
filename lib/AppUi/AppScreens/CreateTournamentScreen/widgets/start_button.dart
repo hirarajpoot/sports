@@ -16,14 +16,11 @@ class StartButton extends StatelessWidget {
         onPressed: controller.startTournament,
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2E8A57),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
         child: const Text(
           'Start Tournament',
           style: TextStyle(
-            fontFamily: 'Inter',
             fontWeight: FontWeight.w600,
             fontSize: 16,
             color: Colors.white,

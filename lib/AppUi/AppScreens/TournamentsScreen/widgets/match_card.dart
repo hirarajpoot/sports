@@ -1,30 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../Models/tournament_match_model.dart';
 import '../../../Controllers/auth-controllers/tournaments_controller.dart';
 
 class MatchCard extends StatelessWidget {
-  final String label;
-  final String teamA;
-  final String teamB;
-  final String imgA;
-  final String imgB;
-  final String time;
-  final String? scoreA;
-  final String? scoreB;
-  final bool isLive;
+  final TournamentMatchModel match;
 
-  MatchCard({
-    super.key,
-    required this.label,
-    required this.teamA,
-    required this.teamB,
-    required this.imgA,
-    required this.imgB,
-    required this.time,
-    this.scoreA,
-    this.scoreB,
-    this.isLive = false,
-  });
+  MatchCard({super.key, required this.match});
 
   final TournamentsController controller = Get.find();
 
@@ -32,10 +14,12 @@ class MatchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
     double scale(double px) => px / 375 * w;
-    final isUpcoming = label == 'UPCOMING';
+    final isUpcoming = match.label == 'UPCOMING';
 
     return GestureDetector(
-      onTap: isUpcoming ? controller.navigateToChallengeScreen : null,
+      onTap: isUpcoming
+          ? () => controller.navigateToChallengeScreen(match)
+          : null,
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(bottom: scale(16)),
@@ -50,7 +34,7 @@ class MatchCard extends StatelessWidget {
               offset: Offset(0, scale(4)),
             ),
           ],
-          border: isLive
+          border: match.isLive
               ? Border(
                   left: BorderSide(
                     color: const Color(0xFFEF4444),
@@ -62,21 +46,22 @@ class MatchCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Top Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  label,
+                  match.label,
                   style: TextStyle(
                     color: isUpcoming
                         ? Colors.blue
-                        : (isLive ? Colors.red : Colors.grey),
+                        : (match.isLive ? Colors.red : Colors.grey),
                     fontWeight: FontWeight.bold,
                     fontSize: scale(14),
                   ),
                 ),
                 Text(
-                  time,
+                  match.time,
                   style: TextStyle(
                     fontSize: scale(16),
                     color: Colors.grey[800],
@@ -85,39 +70,12 @@ class MatchCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: scale(9.32)),
+            // Teams Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/$imgA',
-                      width: scale(32),
-                      height: scale(32),
-                    ),
-                    SizedBox(width: scale(8)),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Team',
-                          style: TextStyle(
-                            fontSize: scale(12),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          teamA,
-                          style: TextStyle(
-                            fontSize: scale(14),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                scoreA == null || scoreB == null
+                _teamInfo(scale, match.imgA, match.teamA, true),
+                match.scoreA == null || match.scoreB == null
                     ? Text(
                         'vs',
                         style: TextStyle(
@@ -125,61 +83,49 @@ class MatchCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       )
-                    : Row(
-                        children: [
-                          Text(
-                            scoreA!,
-                            style: TextStyle(
-                              fontSize: scale(18),
-                              fontWeight: FontWeight.bold,
-                              color: isLive ? Colors.red : Colors.black,
-                            ),
-                          ),
-                          Text(' - ', style: TextStyle(fontSize: scale(18))),
-                          Text(
-                            scoreB!,
-                            style: TextStyle(
-                              fontSize: scale(18),
-                              fontWeight: FontWeight.bold,
-                              color: isLive ? Colors.red : Colors.black,
-                            ),
-                          ),
-                        ],
+                    : Text(
+                        '${match.scoreA} - ${match.scoreB}',
+                        style: TextStyle(
+                          fontSize: scale(18),
+                          fontWeight: FontWeight.bold,
+                          color: match.isLive ? Colors.red : Colors.black,
+                        ),
                       ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Team',
-                          style: TextStyle(
-                            fontSize: scale(12),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          teamB,
-                          style: TextStyle(
-                            fontSize: scale(14),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: scale(8)),
-                    Image.asset(
-                      'assets/images/$imgB',
-                      width: scale(32),
-                      height: scale(32),
-                    ),
-                  ],
-                ),
+                _teamInfo(scale, match.imgB, match.teamB, false),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _teamInfo(
+      double Function(double) scale, String img, String team, bool isLeft) {
+    return Row(
+      children: [
+        if (isLeft)
+          Image.asset('assets/images/$img',
+              width: scale(32), height: scale(32)),
+        SizedBox(width: scale(8)),
+        Column(
+          crossAxisAlignment:
+              isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+          children: [
+            Text(
+              'Team',
+              style: TextStyle(fontSize: scale(12), fontWeight: FontWeight.w600),
+            ),
+            Text(
+              team,
+              style: TextStyle(fontSize: scale(14), fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        if (!isLeft)
+          Image.asset('assets/images/$img',
+              width: scale(32), height: scale(32)),
+      ],
     );
   }
 }

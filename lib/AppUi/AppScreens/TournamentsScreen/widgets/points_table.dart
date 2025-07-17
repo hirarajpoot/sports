@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 
 class PointsTable extends StatelessWidget {
   final double Function(double) scale;
+  final List<Map<String, dynamic>> pointsTable;
 
-  const PointsTable({super.key, required this.scale});
+  const PointsTable({
+    super.key,
+    required this.scale,
+    required this.pointsTable,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final teams = ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'];
-    final played = [10, 10, 10, 10, 10];
-    final won = [8, 7, 6, 5, 4];
-    final lost = [2, 3, 4, 5, 6];
-    final gf = [25, 20, 18, 15, 12];
-
     return Container(
       padding: EdgeInsets.all(scale(12)),
       decoration: BoxDecoration(
@@ -30,17 +29,11 @@ class PointsTable extends StatelessWidget {
         children: [
           _buildHeaderRow(),
           Divider(thickness: 1, color: Colors.grey[300]),
-          ...List.generate(teams.length, (index) {
-            final isTopTeam = index == 0;
-            return _buildDataRow(
-              team: teams[index],
-              played: played[index],
-              won: won[index],
-              lost: lost[index],
-              gf: gf[index],
-              isTopTeam: isTopTeam,
-            );
-          }),
+          ...pointsTable.asMap().entries.map((entry) {
+            final index = entry.key;
+            final team = entry.value;
+            return _buildDataRow(team, isTopTeam: index == 0);
+          }).toList(),
         ],
       ),
     );
@@ -62,14 +55,7 @@ class PointsTable extends StatelessWidget {
     );
   }
 
-  Widget _buildDataRow({
-    required String team,
-    required int played,
-    required int won,
-    required int lost,
-    required int gf,
-    required bool isTopTeam,
-  }) {
+  Widget _buildDataRow(Map<String, dynamic> team, {required bool isTopTeam}) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: scale(12)),
       decoration: BoxDecoration(
@@ -90,14 +76,14 @@ class PointsTable extends StatelessWidget {
                   radius: scale(16),
                 ),
                 SizedBox(width: scale(8)),
-                Text(team, style: TextStyle(fontSize: scale(14))),
+                Text(team['team'], style: TextStyle(fontSize: scale(14))),
               ],
             ),
           ),
-          _dataCell('$played'),
-          _dataCell('$won'),
-          _dataCell('$lost'),
-          _dataCell('$gf'),
+          _dataCell('${team['played']}'),
+          _dataCell('${team['won']}'),
+          _dataCell('${team['lost']}'),
+          _dataCell('${team['gf']}'),
         ],
       ),
     );

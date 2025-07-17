@@ -14,44 +14,53 @@ class NumberOfTeamsField extends StatelessWidget {
       children: [
         const Text(
           'Number of Teams',
-          style: TextStyle(
-            fontSize: 14,
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-          ),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
         GestureDetector(
-          onTap: () => controller.pickNumberOfTeams(context),
+          onTap: () => _showNumberOfTeamsDialog(context, controller),
           child: Container(
             height: 40,
-            width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white, // ✅ Field bg white
-              border: Border.all(color: Colors.grey.shade400, width: 1),
+              border: Border.all(color: Colors.grey.shade400),
               borderRadius: BorderRadius.circular(6),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
                 Expanded(
-                  child: Obx(
-                    () => Text(
-                      controller.selectedTeams.value,
-                      style: const TextStyle(fontFamily: 'Inter'),
-                    ),
-                  ),
+                  child: Obx(() => Text(
+                        "${controller.selectedTeams.length} Teams Selected",
+                        style: const TextStyle(fontFamily: 'Inter'),
+                      )),
                 ),
-                const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.grey,
-                ), // ✅ No extra bg
+                const Icon(Icons.arrow_drop_down, color: Colors.grey),
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+
+  void _showNumberOfTeamsDialog(BuildContext context, CreateTournamentController controller) {
+    Get.bottomSheet(
+      Container(
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [4, 8, 16, 32].map((numTeams) {
+            return ListTile(
+              title: Text("$numTeams Teams"),
+              onTap: () {
+                // Reset selected teams
+                controller.selectedTeams.value = List.generate(numTeams, (index) => "Team ${String.fromCharCode(65 + index)}");
+                Get.back();
+              },
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }

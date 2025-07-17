@@ -129,12 +129,12 @@ class AppRoutes {
       transition: Transition.rightToLeft,
       transitionDuration: Duration(milliseconds: 500),
     ),
-    GetPage(
-      name: tournamentPreview,
-      page: () => const TournamentPreviewScreen(),
-      transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
-    ),
+   GetPage(
+  name: tournamentPreview,
+  page: () => TournamentPreviewScreen(),
+  transition: Transition.rightToLeft,
+  transitionDuration: Duration(milliseconds: 500),
+),
     GetPage(
       name: tournamentScreen,
       page: () => TournamentsScreen(),

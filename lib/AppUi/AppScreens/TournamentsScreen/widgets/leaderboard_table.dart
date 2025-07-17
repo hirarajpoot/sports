@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class LeaderboardTable extends StatelessWidget {
   final double Function(double) scale;
+  final List<Map<String, dynamic>> leaderboard;
 
-  const LeaderboardTable({super.key, required this.scale});
+  const LeaderboardTable({
+    super.key,
+    required this.scale,
+    required this.leaderboard,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class LeaderboardTable extends StatelessWidget {
         },
         children: [
           _buildHeaderRow(),
-          ...List.generate(6, (index) => _buildDataRow(index)),
+          ...leaderboard.map((team) => _buildDataRow(team)).toList(),
         ],
       ),
     );
@@ -55,7 +60,7 @@ class LeaderboardTable extends StatelessWidget {
     );
   }
 
-  TableRow _buildDataRow(int index) {
+  TableRow _buildDataRow(Map<String, dynamic> team) {
     return TableRow(
       children: [
         Padding(
@@ -64,30 +69,22 @@ class LeaderboardTable extends StatelessWidget {
             vertical: scale(12),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Text(
-                  '${index + 1}.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                    fontSize: scale(14),
-                  ),
-                  textAlign: TextAlign.left,
+              Text(
+                '${team['rankPoints']}',
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                  fontSize: scale(14),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: scale(10)),
-                  child: Text(
-                    '24',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey.shade800,
-                      fontSize: scale(14),
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
+              Text(
+                '${team['rankPoints']} pts',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade800,
+                  fontSize: scale(14),
                 ),
               ),
             ],
@@ -103,7 +100,7 @@ class LeaderboardTable extends StatelessWidget {
               ),
               SizedBox(height: scale(4)),
               Text(
-                'Team Alpha',
+                team['team'],
                 style: TextStyle(
                   fontSize: scale(14),
                   fontWeight: FontWeight.w600,
@@ -116,7 +113,7 @@ class LeaderboardTable extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: scale(12)),
           child: Center(
             child: Text(
-              '8',
+              '${team['won']}',
               style: TextStyle(fontSize: scale(14)),
             ),
           ),

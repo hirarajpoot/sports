@@ -11,7 +11,7 @@ import '../AppScreens/TournamentsScreen/widgets/points_table.dart';
 class TournamentsScreen extends StatelessWidget {
   final TournamentsController controller = Get.put(TournamentsController());
 
-   TournamentsScreen({super.key});
+  TournamentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,45 +35,28 @@ class TournamentsScreen extends StatelessWidget {
                       Obx(() {
                         if (controller.selectedTab.value == 0) {
                           return Column(
-                            children: [
-                              MatchCard(
-                                // scale: scale,
-                                label: 'UPCOMING',
-                                teamA: 'Alpha',
-                                teamB: 'Beta',
-                                imgA: 'alpha.png',
-                                imgB: 'beta.png',
-                                time: 'Today, 7:00 PM',
-                              ),
-                              MatchCard(
-                                // scale: scale,
-                                label: 'LIVE',
-                                teamA: 'Gamma',
-                                teamB: 'Delta',
-                                imgA: 'gamma.png',
-                                imgB: 'beta.png',
-                                time: 'Half-time',
-                                scoreA: '2',
-                                scoreB: '1',
-                                isLive: true,
-                              ),
-                              MatchCard(
-                                // scale: scale,
-                                label: 'COMPLETED',
-                                teamA: 'Epsilon',
-                                teamB: 'Zeta',
-                                imgA: 'alpha.png',
-                                imgB: 'beta.png',
-                                time: 'Yesterday, 9:00 PM',
-                                scoreA: '3',
-                                scoreB: '0',
-                              ),
-                            ],
+                            children: controller.matchesData.map((match) {
+                              return MatchCard(match: match);
+                            }).toList(),
                           );
                         } else if (controller.selectedTab.value == 1) {
-                          return LeaderboardTable(scale: scale);
+                          return LeaderboardTable(
+                            scale: scale,
+                            leaderboard: [
+                              {'rankPoints': 24, 'team': 'Team Alpha', 'won': 8},
+                              {'rankPoints': 20, 'team': 'Team Beta', 'won': 6},
+                              {'rankPoints': 18, 'team': 'Team Gamma', 'won': 5},
+                            ],
+                          );
                         } else {
-                          return PointsTable(scale: scale);
+                          return PointsTable(
+                            scale: scale,
+                            pointsTable: [
+                              {'team': 'Team Alpha', 'played': 10, 'won': 8, 'lost': 2, 'gf': 25},
+                              {'team': 'Team Beta', 'played': 10, 'won': 7, 'lost': 3, 'gf': 22},
+                              {'team': 'Team Gamma', 'played': 10, 'won': 6, 'lost': 4, 'gf': 18},
+                            ],
+                          );
                         }
                       }),
                     ],
