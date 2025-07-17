@@ -20,6 +20,8 @@ import '../../AppScreens/tournament_preview_screen.dart';
 import '../../AppScreens/tournament_screen.dart';
 import '../../AppScreens/challenge_screen.dart';
 import '../../AppScreens/club_screen.dart'; // 👈 NEW IMPORT
+import '../../AppScreens/create_club_screen.dart';
+// import '../../AppScreens/club_summary_screen.dart';
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -44,6 +46,8 @@ class AppRoutes {
   static const String tournamentScreen = '/tournament-screen';
   static const String challengeScreen = '/challenge-screen';
   static const String clubsScreen = '/clubs-screen'; // 👈 NEW ROUTE
+  static const String createClub = '/create-club';
+  static const String clubSummary = '/club-summary';
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -147,5 +151,19 @@ class AppRoutes {
       page: () => ClubsScreen(), // 👈 New screen added here
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: createClub,
+      page: () => CreateClubScreen(),
+      transition: Transition.rightToLeft,
+    ),
+
+    // GetPage(
+    //   name: clubSummary,
+    //   page: () => ClubSummaryScreen(
+    //     name: '', // default, will be replaced via Get.toNamed arguments
+    //     about: '',
+    //   ),
+    //   transition: Transition.rightToLeft,
+    // ),
   ];
 }

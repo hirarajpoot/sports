@@ -29,8 +29,8 @@ class ClubController extends GetxController {
     selectedTab.value = index;
   }
 
-  void goToCreateClub() {
-    selectTab(1);
-    // Future: Navigate to Create Club Screen
+   void goToCreateClub() {
+    Get.back(); 
+    Get.toNamed('/create-club'); 
   }
 }

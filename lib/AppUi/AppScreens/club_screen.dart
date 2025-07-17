@@ -10,7 +10,7 @@ class ClubsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ClubController());
-    final w = MediaQuery.of(context).size.width;
+    // final w = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Stack(
@@ -116,7 +116,7 @@ class ClubsScreen extends StatelessWidget {
                           final club = controller.clubs[index];
                           return ClubCard(
                             club: club,
-                            onTap: () {},
+                             onTap: () => Get.toNamed('/club-details'),
                             showImage: index == 0,
                           );
                         },
