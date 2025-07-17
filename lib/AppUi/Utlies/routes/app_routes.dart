@@ -18,8 +18,6 @@ import '../../AppScreens/match_screen.dart';
 import '../../AppScreens/create_tournament_screen.dart';
 import '../../AppScreens/tournament_preview_screen.dart';
 import '../../AppScreens/tournament_screen.dart';
-
-// ✅ Import ChallengeScreen
 import '../../AppScreens/challenge_screen.dart';
 
 class AppRoutes {
@@ -101,7 +99,6 @@ class AppRoutes {
       name: matchPreview,
       page: () => const MatchPreviewScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: liveMatch,
@@ -127,25 +124,21 @@ class AppRoutes {
       name: createTournament,
       page: () => CreateTournamentScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
    GetPage(
   name: tournamentPreview,
   page: () => TournamentPreviewScreen(),
   transition: Transition.rightToLeft,
-  transitionDuration: Duration(milliseconds: 500),
 ),
     GetPage(
       name: tournamentScreen,
       page: () => TournamentsScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
     GetPage(
       name: challengeScreen,
       page: () => ChallengeScreen(),
       transition: Transition.rightToLeft,
-      transitionDuration: Duration(milliseconds: 500),
     ),
   ];
 }
