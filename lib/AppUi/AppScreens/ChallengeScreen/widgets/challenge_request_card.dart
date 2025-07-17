@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../Controllers/auth-controllers/challenge_controller.dart';
 import '../../../Models/challenge_request_model.dart';
 
@@ -21,7 +22,7 @@ class ChallengeRequestCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
         ],
       ),
       child: Column(
@@ -72,7 +73,9 @@ class ChallengeRequestCard extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed('/clubs-screen'); // ✅ Navigate to MatchPreview
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2E8A57),
                     shape: RoundedRectangleBorder(
@@ -85,6 +88,7 @@ class ChallengeRequestCard extends StatelessWidget {
                   ),
                 ),
               ),
+
               const SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton(
@@ -115,10 +119,7 @@ class ChallengeRequestCard extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 12),
-      ),
+      child: Text(text, style: const TextStyle(fontSize: 12)),
     );
   }
 }

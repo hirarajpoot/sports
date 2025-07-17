@@ -19,6 +19,7 @@ import '../../AppScreens/create_tournament_screen.dart';
 import '../../AppScreens/tournament_preview_screen.dart';
 import '../../AppScreens/tournament_screen.dart';
 import '../../AppScreens/challenge_screen.dart';
+import '../../AppScreens/club_screen.dart'; // 👈 NEW IMPORT
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -42,6 +43,7 @@ class AppRoutes {
   static const String tournamentPreview = '/tournament-preview';
   static const String tournamentScreen = '/tournament-screen';
   static const String challengeScreen = '/challenge-screen';
+  static const String clubsScreen = '/clubs-screen'; // 👈 NEW ROUTE
 
   static final pages = [
     GetPage(name: splash, page: () => Splash()),
@@ -125,11 +127,11 @@ class AppRoutes {
       page: () => CreateTournamentScreen(),
       transition: Transition.rightToLeft,
     ),
-   GetPage(
-  name: tournamentPreview,
-  page: () => TournamentPreviewScreen(),
-  transition: Transition.rightToLeft,
-),
+    GetPage(
+      name: tournamentPreview,
+      page: () => TournamentPreviewScreen(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
       name: tournamentScreen,
       page: () => TournamentsScreen(),
@@ -138,6 +140,11 @@ class AppRoutes {
     GetPage(
       name: challengeScreen,
       page: () => ChallengeScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: clubsScreen,
+      page: () => ClubsScreen(), // 👈 New screen added here
       transition: Transition.rightToLeft,
     ),
   ];

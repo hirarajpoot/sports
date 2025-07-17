@@ -6,7 +6,7 @@ void main() {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.clubsScreen,
       getPages: AppRoutes.pages,
     ),
   );
