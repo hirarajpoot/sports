@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/tournament_model.dart';
-// import '../../Utlies/routes/app_routes.dart';
-
 class CreateTournamentController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
