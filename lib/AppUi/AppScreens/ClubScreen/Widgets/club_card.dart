@@ -1,20 +1,27 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../Models/club_model.dart';
 
 class ClubCard extends StatelessWidget {
   final Club club;
   final VoidCallback onTap;
-  final bool showImage;
 
-  const ClubCard({
-    super.key,
-    required this.club,
-    required this.onTap,
-    this.showImage = true,
-  });
+  const ClubCard({super.key, required this.club, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider imageProvider;
+
+    try {
+      if (club.imagePath.startsWith('assets/')) {
+        imageProvider = AssetImage(club.imagePath);
+      } else {
+        imageProvider = FileImage(File(club.imagePath));
+      }
+    } catch (_) {
+      imageProvider = const AssetImage('assets/images/default.png');
+    }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -33,7 +40,7 @@ class ClubCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Title
+          // 🧾 Club Name + Match Type
           Text(
             club.name,
             style: const TextStyle(
@@ -43,8 +50,6 @@ class ClubCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-
-          // Subtitle
           Text(
             club.matchType,
             style: const TextStyle(
@@ -54,53 +59,54 @@ class ClubCard extends StatelessWidget {
               fontFamily: 'Inter',
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
 
-          // Image + Category + Members
+          // 🏷️ Category + Members + Image
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (showImage)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/beta.png',
+              // ⬇️ Image aligned slightly lower
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: ClipOval(
+                  child: Image(
+                    image: imageProvider,
                     width: 32,
                     height: 32,
                     fit: BoxFit.cover,
                   ),
-                )
-              else
-                const SizedBox(width: 32, height: 32), 
-
-              const SizedBox(width: 12),
-
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE0E0E0),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  club.category,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
-                  ),
                 ),
               ),
-
               const SizedBox(width: 12),
-
-              Text(
-                '${club.members} Members',
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black54,
+              // 🏷️ Category and Members
+              Expanded(
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE0E0E0),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        club.category,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      '${club.members} Members',
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -108,7 +114,7 @@ class ClubCard extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // View Details Button
+          // 🔘 View Details Button
           Center(
             child: SizedBox(
               width: 270,

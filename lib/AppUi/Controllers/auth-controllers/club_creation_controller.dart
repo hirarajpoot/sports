@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../Models/club_model.dart';
 import 'club_controller.dart';
 
@@ -17,16 +19,41 @@ class ClubCreationController extends GetxController {
     imagePath.value = '';
   }
 
+  /// Picks image from gallery
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      imagePath.value = image.path;
+    }
+  }
+
+  /// Creates a new club with fallback values if fields are empty
   void createClub() {
+    final name = clubName.value.trim().isEmpty
+        ? 'Unnamed Club'
+        : clubName.value.trim();
+
+    final aboutText = about.value.trim().isEmpty
+        ? 'No description available.'
+        : about.value.trim();
+
+    final img = imagePath.value.isNotEmpty
+        ? imagePath.value
+        : 'assets/images/default.png';
+
     final newClub = Club(
-      name: clubName.value,
-      matchType: 'Custom',
-      category: 'New',
+      name: name,
+      matchType: 'friendly match',
+      category: 'Football',
       members: 1,
+      imagePath: img,
+      about: aboutText,
     );
 
     final clubController = Get.find<ClubController>();
     clubController.clubs.add(newClub);
+
     clearForm();
   }
 }

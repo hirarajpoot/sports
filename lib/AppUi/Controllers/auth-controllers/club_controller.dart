@@ -10,18 +10,24 @@ class ClubController extends GetxController {
       matchType: "friendly match",
       category: "Football",
       members: 45,
+      imagePath: 'assets/images/default.png',
+      about: 'Top tier football club.',
     ),
     Club(
       name: "Beta United",
       matchType: "friendly match",
       category: "Football",
       members: 45,
+      imagePath: 'assets/images/default.png',
+      about: 'Community football team.',
     ),
     Club(
       name: "Gamma Legends",
       matchType: "friendly match",
       category: "Pro",
       members: 20,
+      imagePath: 'assets/images/default.png',
+      about: 'Legends of the league.',
     ),
   ].obs;
 
@@ -29,7 +35,7 @@ class ClubController extends GetxController {
     selectedTab.value = index;
   }
 
-   void goToCreateClub() {
+  void goToCreateClub() {
     Get.back(); 
     Get.toNamed('/create-club'); 
   }

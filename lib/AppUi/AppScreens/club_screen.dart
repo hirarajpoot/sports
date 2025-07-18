@@ -116,8 +116,7 @@ class ClubsScreen extends StatelessWidget {
                           final club = controller.clubs[index];
                           return ClubCard(
                             club: club,
-                             onTap: () => Get.toNamed('/club-details'),
-                            showImage: index == 0,
+                            onTap: () => Get.toNamed('/club-details'),
                           );
                         },
                       ),

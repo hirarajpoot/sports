@@ -1,61 +1,39 @@
-// class CreateClubButtons extends StatelessWidget {
-//   final VoidCallback onNext;
-//   final VoidCallback onCancel;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../Controllers/auth-controllers/club_creation_controller.dart';
 
-//   const CreateClubButtons({
-//     super.key,
-//     required this.onNext,
-//     required this.onCancel,
-//   });
+class CreateClubButton extends StatelessWidget {
+  final ClubCreationController controller;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       children: [
-//         SizedBox(
-//           width: 151,
-//           height: 53,
-//           child: ElevatedButton(
-//             style: ElevatedButton.styleFrom(
-//               backgroundColor: const Color(0xFF2E8A50),
-//               shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(8),
-//               ),
-//             ),
-//             onPressed: onNext,
-//             child: const Text(
-//               "Next",
-//               style: TextStyle(
-//                 fontWeight: FontWeight.w600,
-//                 fontSize: 15,
-//                 color: Colors.white,
-//               ),
-//             ),
-//           ),
-//         ),
-//         SizedBox(
-//           width: 151,
-//           height: 53,
-//           child: ElevatedButton(
-//             style: ElevatedButton.styleFrom(
-//               backgroundColor: Colors.red,
-//               shape: RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.circular(8),
-//               ),
-//             ),
-//             onPressed: onCancel,
-//             child: const Text(
-//               "Cancel",
-//               style: TextStyle(
-//                 fontWeight: FontWeight.w600,
-//                 fontSize: 15,
-//                 color: Colors.white,
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  const CreateClubButton({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: 270,
+        height: 43,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF2E8A57),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          onPressed: () {
+            controller.createClub();
+            Get.toNamed('/clubs-screen');
+          },
+          child: const Text(
+            'Create Club',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 15,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
