@@ -22,6 +22,8 @@ import '../../AppScreens/challenge_screen.dart';
 import '../../AppScreens/club_screen.dart'; 
 import '../../AppScreens/create_club_screen.dart';
 import '../../AppScreens/club_details_screen.dart'; 
+import '../../Controllers/auth-controllers/club_controller.dart';
+
 
 class AppRoutes {
   static const String splashscreen = '/splashscreen';
@@ -151,11 +153,20 @@ class AppRoutes {
       page: () => ClubsScreen(), 
       transition: Transition.rightToLeft,
     ),
+    // GetPage(
+    //   name: createClub,
+    //   page: () => CreateClubScreen(),
+    //   transition: Transition.rightToLeft,
+    // ),
     GetPage(
-      name: createClub,
-      page: () => CreateClubScreen(),
-      transition: Transition.rightToLeft,
-    ),
+  name: createClub,
+  page: () => CreateClubScreen(),
+  transition: Transition.rightToLeft,
+binding: BindingsBuilder(() {
+  Get.lazyPut(() => ClubController());
+}),
+),
+
     GetPage(
       name:clubDetails,
       page: () => ClubDetailsScreen(),
