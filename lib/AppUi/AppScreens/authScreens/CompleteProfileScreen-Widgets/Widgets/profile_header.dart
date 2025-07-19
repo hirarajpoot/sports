@@ -59,7 +59,6 @@ class ProfileHeader extends StatelessWidget {
           const SizedBox(height: 10),
           TextButton(
             onPressed: () {
-              // TODO: Add edit image functionality
             },
             child: const Text(
               "Edit",

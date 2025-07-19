@@ -17,9 +17,9 @@ class MatchCard extends StatelessWidget {
     final isUpcoming = match.label == 'UPCOMING';
 
     return GestureDetector(
-      onTap: isUpcoming
-          ? () => controller.navigateToChallengeScreen(match)
-          : null,
+      // onTap: isUpcoming
+          // ? () => controller.navigateToChallengeScreen(match)
+          // : null,
       child: Container(
         width: double.infinity,
         margin: EdgeInsets.only(bottom: scale(16)),

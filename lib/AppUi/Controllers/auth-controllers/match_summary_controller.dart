@@ -21,7 +21,7 @@ class MatchSummaryController extends GetxController {
     },
   ].obs;
 
-  void navigateToNextScreen() {
-    Get.toNamed('/leaderboard'); 
-  }
+  // void navigateToNextScreen() {
+  //   Get.toNamed('/leaderboard'); 
+  // }
 }

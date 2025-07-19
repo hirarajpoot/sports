@@ -29,10 +29,12 @@ class NumberOfTeamsField extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Obx(() => Text(
-                        "${controller.selectedTeams.length} Teams Selected",
-                        style: const TextStyle(fontFamily: 'Inter'),
-                      )),
+                  child: Obx(
+                    () => Text(
+                      "${controller.selectedTeams.length} Teams Selected",
+                      style: const TextStyle(fontFamily: 'Inter'),
+                    ),
+                  ),
                 ),
                 const Icon(Icons.arrow_drop_down, color: Colors.grey),
               ],
@@ -43,18 +45,20 @@ class NumberOfTeamsField extends StatelessWidget {
     );
   }
 
-  void _showNumberOfTeamsDialog(BuildContext context, CreateTournamentController controller) {
+  void _showNumberOfTeamsDialog(
+    BuildContext context,
+    CreateTournamentController controller,
+  ) {
     Get.bottomSheet(
       Container(
         color: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [4, 8, 16, 32].map((numTeams) {
+          children: [2, 4, 6, 8].map((numTeams) {
             return ListTile(
               title: Text("$numTeams Teams"),
               onTap: () {
-                // Reset selected teams
-                controller.selectedTeams.value = List.generate(numTeams, (index) => "Team ${String.fromCharCode(65 + index)}");
+                controller.updateSelectedTeams(numTeams);
                 Get.back();
               },
             );

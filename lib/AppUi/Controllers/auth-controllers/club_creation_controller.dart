@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../Models/club_model.dart';
@@ -19,7 +18,6 @@ class ClubCreationController extends GetxController {
     imagePath.value = '';
   }
 
-  /// Picks image from gallery
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -27,8 +25,6 @@ class ClubCreationController extends GetxController {
       imagePath.value = image.path;
     }
   }
-
-  /// Creates a new club with fallback values if fields are empty
   void createClub() {
     final name = clubName.value.trim().isEmpty
         ? 'Unnamed Club'

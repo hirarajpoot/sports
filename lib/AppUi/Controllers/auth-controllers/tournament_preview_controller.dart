@@ -14,15 +14,16 @@ class TournamentPreviewController extends GetxController {
 
   void generateMatchups() {
     matchups.clear();
-    for (int i = 0; i < selectedTeams.length - 1; i++) {
-      matchups.add({
-        'team1': selectedTeams[i],
-        'team2': selectedTeams[i + 1],
-      });
-    }
+  for (int i = 0; i + 1 < selectedTeams.length; i += 2) {
+  matchups.add({
+    'team1': selectedTeams[i],
+    'team2': selectedTeams[i + 1],
+  });
+}
+
   }
 
   void startTournament() {
-    Get.toNamed('/tournament-screen');
+    Get.toNamed('/match-start');
   }
 }

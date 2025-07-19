@@ -13,7 +13,22 @@ class BottomNavBar extends StatelessWidget {
       () => BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: controller.currentIndex.value,
-        onTap: controller.changeTab,
+        onTap: (index) {
+          controller.currentIndex.value = index;
+
+          switch (index) {
+            case 1:
+              Get.toNamed('/stats');
+              break;
+            case 2:
+              Get.toNamed('/clubs-screen');
+              break;
+            case 3:
+              Get.toNamed('/challenge-screen');
+              break;
+            // No navigation on index 0 (Home)
+          }
+        },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF8BC83F),
         unselectedItemColor: Colors.grey,
@@ -26,15 +41,15 @@ class BottomNavBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: _buildIcon('assets/icons/per.png', 1, controller),
-            label: 'Tab2',
+            label: 'Stats',
           ),
           BottomNavigationBarItem(
             icon: _buildIcon('assets/icons/dor.png', 2, controller),
-            label: 'Tab3',
+            label: 'Clubs',
           ),
           BottomNavigationBarItem(
             icon: _buildIcon('assets/icons/se.png', 3, controller),
-            label: 'Tab4',
+            label: 'Challenge',
           ),
         ],
       ),

@@ -13,7 +13,23 @@ class StartButton extends StatelessWidget {
       width: double.infinity,
       height: 48,
       child: ElevatedButton(
-        onPressed: controller.startTournament,
+        onPressed: () {
+          // ✅ Send selected teams to TournamentPreviewScreen
+          if (controller.selectedTeams.isNotEmpty) {
+            // Get.toNamed(
+            //   '/tournament-preview',
+            //   arguments: controller.selectedTeams,
+            // );
+          } else {
+            Get.snackbar(
+              "No Teams Selected",
+              "Please select at least 2 teams to start the tournament.",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.redAccent,
+              colorText: Colors.white,
+            );
+          }
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2E8A57),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),

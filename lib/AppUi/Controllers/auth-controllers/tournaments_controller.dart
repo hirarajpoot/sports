@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+// import 'package:sports/AppUi/Utlies/routes/app_routes.dart';
 import '../../Models/tournament_match_model.dart';
 
 class TournamentsController extends GetxController {
@@ -40,7 +41,7 @@ class TournamentsController extends GetxController {
     selectedTab.value = index;
   }
 
-  void navigateToChallengeScreen(TournamentMatchModel match) {
-    Get.toNamed('/challenge-screen', arguments: match);
-  }
+  // void navigateToChallengeScreen(TournamentMatchModel match) {
+  //   Get.toNamed(AppRoutes.addPlayers, arguments: match);
+  // }
 }

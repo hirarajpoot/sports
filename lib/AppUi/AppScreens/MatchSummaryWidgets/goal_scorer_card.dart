@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../Controllers/auth-controllers/match_summary_controller.dart';
+// import 'package:get/get.dart';
+// import '../../Controllers/auth-controllers/match_summary_controller.dart';
 
 class GoalScorerCard extends StatelessWidget {
   final String minute;
@@ -20,10 +20,10 @@ class GoalScorerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.find<MatchSummaryController>();
+    // final ctrl = Get.find<MatchSummaryController>();
 
     return GestureDetector(
-      onTap: ctrl.navigateToNextScreen,
+      // onTap: ctrl.navigateToNextScreen,
       child: Container(
         width: 330,
         height: 79,

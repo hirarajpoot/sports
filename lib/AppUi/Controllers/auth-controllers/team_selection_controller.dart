@@ -4,6 +4,6 @@ class TeamSelectionController extends GetxController {
   RxBool isClubSelected = true.obs;
 
   void goToNextScreen() {
-    Get.toNamed('/add-players');
+    Get.toNamed('/match-start');
   }
 }

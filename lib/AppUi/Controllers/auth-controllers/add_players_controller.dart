@@ -4,7 +4,7 @@ class AddPlayersController extends GetxController {
   void goBack() => Get.back();
 
   void navigateToPhoneInput() {
-    Get.toNamed('/match-start');
+    Get.toNamed('/tournament-preview');
   }
 
   void navigateToContacts() {
